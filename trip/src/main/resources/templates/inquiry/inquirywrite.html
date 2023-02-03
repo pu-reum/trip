@@ -1,0 +1,63 @@
+<style>
+#send{
+	color: ffffff;
+	border:1px solid green;
+}
+#send:hover{
+	color:green;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+	crossorigin="anonymous"></script>
+<script>
+	$(document).ready(function(){
+		
+		//제목과 본문 입력 안 했을 떄
+		$("#send").click(function(){
+			var title=$('input[name=icate]').val().trim();
+			var content=$('#comment').val().trim();
+			if((content == '' || content == null) && (title=='' || title==null)){
+				alert("제목과 내용을 입력하세요");
+				return false;
+			}else if(content == '' || content == null){
+				alert("내용을 입력하세요");
+				return false;
+			}else if(title=='' || title==null){
+				alert("제목을 입력하세요");
+				return false;
+			}
+		});
+		
+	});
+</script>
+<!-- contact section start -->
+<div class="contact_section layout_padding" style="margin-bottom:500px;">
+	
+		<div class="text-center">
+			<h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">마이페이지</h6>
+			<h1>1:1 문의</h1>
+		</div>
+		
+		<form class="container" th:action="@{/inquiry/inquirywriteok}" method="post" enctype="multipart/form-data">
+		
+		<div class="email_text">
+			
+			<div class="form-group">
+				<input type="text" class="email-bt" placeholder="제목"
+					name="icate">
+			</div>
+			<div class="form-group">
+				<textarea class="massage-bt" placeholder="내용" rows="5"
+					id="comment" name="icontent"></textarea>
+			</div>
+			<div class="form-group">
+				<input type="file" class="email-bt" placeholder="첨부파일" name="img">
+			</div>
+			
+			<div class="send_btn">
+				<button type="submit" id="send">문의등록</button>
+			</div>
+		</div>
+	</form>
+</div>
+<!-- contact section end -->

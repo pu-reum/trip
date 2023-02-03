@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.trip.dto.Criteria;
 import com.trip.dto.Cust;
 import com.trip.dto.Inquiry;
+import com.trip.dto.Page;
 import com.trip.frame.ImgUtil;
 import com.trip.service.InquiryService;
 
@@ -31,12 +33,13 @@ public class InquiryController {
 
 	// 목록
 	@RequestMapping("")
-	public String inquiry(Model model, HttpSession session) throws Exception {
+	public String inquiry(Criteria criteria, Model model) throws Exception {
 
 		// 글 목록
-		Cust cust = (Cust) session.getAttribute("logincust");
-		List<Inquiry> list = is.selectInquiryList(cust.getCustid());
+		//Cust cust = (Cust) session.getAttribute("logincust");
+		List<Inquiry> list = is.selectInquiryList(criteria);
 		model.addAttribute("list", list);
+		model.addAttribute("pageMaker", new Page(is.getTotalData(), 5, criteria));
 		model.addAttribute("center", dir + "inquiry");
 		return "index";
 	}
@@ -65,8 +68,6 @@ public class InquiryController {
 			e.printStackTrace();
 			return "redirect:/inquirywrite";
 		}
-		
-		
 
 		return "redirect:/inquiry";
 
@@ -86,9 +87,18 @@ public class InquiryController {
 	@PostMapping("/inquiryeditok")
 	public String inquiryeditok(Inquiry inquiry, Model model, HttpSession session) throws Exception {
 		Cust cust = (Cust) session.getAttribute("logincust");
+		String file = inquiry.getImg().getOriginalFilename();
+		
 		inquiry.setCustid(cust.getCustid());
-		is.updeateInquiry(inquiry);
-		model.addAttribute("result", inquiry);
+		inquiry.setFile(file);
+		try {
+			ImgUtil.saveFile(inquiry.getImg(), custdir);
+			is.updeateInquiry(inquiry);
+			model.addAttribute("result", inquiry);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/inquiryedit";
+		}
 
 		return "redirect:/inquiry";
 

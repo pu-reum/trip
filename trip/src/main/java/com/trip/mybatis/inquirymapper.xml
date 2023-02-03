@@ -5,15 +5,15 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.trip.mapper.InquiryMapper">
 
 	<insert id="insertInquiry" parameterType="Inquiry">
-		INSERT INTO inquiry VALUES (null, #{custid}, #{icate}, #{icontent}, #{file}, null, NOW())
+		INSERT INTO inquiry VALUES (null, #{custid}, #{icate}, #{icontent}, #{file}, "N", NOW())
 	</insert>
 	
 	<delete id="deleteInquiry">
 		DELETE FROM inquiry WHERE inquiryid=#{inquiryid} AND custid=#{custid}
 	</delete>
 	
-	<update id="updateInquiry" parameterType="Inquiry">
-		UPDATE inquiry SET icate=#{icate}, icontent=#{icontent} WHERE inquiryid=#{inquiryid}
+	<update id="updateInquiry">
+		UPDATE inquiry SET icate=#{icate}, icontent=#{icontent} WHERE inquiryid=#{inquiryid} custid=#{custid}
 	</update>
 	
 	<select id="selectInquiry" parameterType="Integer" resultType="Inquiry">
@@ -21,6 +21,20 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectInquiryList" resultType="Inquiry">
-		SELECT * FROM inquiry WHERE custid=#{custid} ORDER BY inquiryid desc
+		<![CDATA[
+			SELECT x.inquiryid, x.custid, x.icate, x.icontent, x.file, x.iprocess, x.rdate
+			FROM (
+				SELECT @rownum:=@rownum+1 as rn, a.inquiryid, a.custid, a.icate, a.icontent, a.file, a.iprocess, a.rdate
+				FROM(
+					SELECT inquiryid, custid, icate, icontent, file, iprocess, rdate
+					FROM inquiry
+					order by inquiryid DESC) A, (SELECT @rownum:=0)R
+				WHERE @rownum <= #{pageNum}*#{total}) x
+			WHERE x.rn > (#{pageNum}-1)*#{total}
+		]]>
+	</select>
+	
+	<select id="getTotalData" resultType="int">
+		SELECT COUNT(inquiryid) FROM inquiry
 	</select>
 </mapper>

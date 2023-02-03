@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+	crossorigin="anonymous"></script>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+<script
+	src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+<style>
+.search-form {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.search-form input {
+  height: 100%;
+  background: transparent;
+  border: 0;
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  height: 100%;
+  font-size: 1rem;
+}
+
+.search-form select {
+  background: transparent;
+  border: 0;
+  padding: 1rem;
+  height: 100%;
+  font-size: 1rem;
+}
+
+.search-form select:focus {
+  border: 0;
+}
+.card-margin {
+  margin-bottom: 1.875rem;
+}
+
+@media (min-width: 992px) {
+  .col-lg-2 {
+    flex: 0 0 16.66667%;
+    max-width: 16.66667%;
+  }
+}
+
+.card {
+  border: 0;
+  box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #ffffff;
+  background-clip: border-box;
+  border: 1px solid #e6e4e9;
+  border-radius: 8px;
+}
+
+	body,ul, li{
+		margin:0;
+		padding:0;
+		list-style-type:none;
+	}
+	#summernote{
+		margin:auto;
+	}
+	#id{
+		margin:auto;
+	}
+	#btn{
+		float:right;
+	}
+	#title{
+		padding:5px;
+	}
+	
+</style>
+<script>
+	$(document).ready(function(){
+		
+		//제목과 본문 입력 안 했을 떄
+		$("#send").click(function(){
+			var title=$('input[name=icate]').val().trim();
+			var content=$('#comment').val().trim();
+			if((content == '' || content == null) && (title=='' || title==null)){
+				alert("제목과 내용을 입력하세요");
+				return false;
+			}else if(content == '' || content == null){
+				alert("내용을 입력하세요");
+				return false;
+			}else if(title=='' || title==null){
+				alert("제목을 입력하세요");
+				return false;
+			}
+		});
+		
+	});
+</script>
+</head>
+<style>
+#send{
+	color: ffffff;
+	border:1px solid green;
+}
+#send:hover{
+	color:green;
+}
+</style>
+<!-- contact section start -->
+<div class="contact_section layout_padding" style="margin-bottom:500px;">
+	
+		<div class="text-center">
+			<h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">마이페이지</h6>
+			<h1>1:1 문의</h1>
+		</div>
+		
+		<form class="container" th:action="@{/inquiry/inquiryeditok}" method="post">
+		
+		<div class="email_text">
+			
+			<div class="form-group">
+				<input type="text" class="email-bt" placeholder="제목"
+					name="icate" th:value="${inquiry.icate}">
+			</div>
+			<div class="form-group">
+				<textarea class="massage-bt" placeholder="내용" rows="5"
+					id="comment" name="icontent" th:text="${inquiry.icontent}"></textarea>
+			</div>
+			
+			<div class="form-group">
+				<input type="file" class="email-bt" placeholder="첨부파일" name="img">
+			</div>
+			
+			<div class="send_btn">
+				<button type="submit" id="send">문의수정</button>
+			</div>
+		</div>
+	</form>
+</div>
+<!-- contact section end -->

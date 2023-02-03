@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<link th:href="@{/css/bootstrap.min.css}"
+	href="../css/bootstrap.min.css" rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+<style>
+.container {
+	margin-top:50px;
+	max-width: 700px;
+}
+.inquiry_view{
+	margin-top:20px;
+	border:1px solid;
+}
+td, th{
+	border-bottom:1px solid;
+	border-right:1px solid;
+	text-align: center;
+	padding: 5px;
+}
+button{
+	margin-top:20px;
+	border:0;
+}
+#upimg{
+	width: 100px;
+	height: 100px;
+}
+</style>
+
+
+</head>
+<body>
+	<div class="container">
+		<h2>게시글 상세 화면</h2>
+		<form id="form" method="post">
+
+			<table class="inquiry_view">
+				<colgroup>
+					<col width="15%" />
+					<col width="35%" />
+					<col width="15%" />
+					<col width="35%" />
+				</colgroup>
+
+				<tbody>
+					<tr>
+						<th scope="row">글 번호</th>
+						<td th:text="${inquiry.inquiryid}"></td>
+						<th scope="row">답변여부</th>
+						<td th:text="${inquiry.iprocess}"></td>
+					</tr>
+					<tr>
+						<th scope="row">작성자</th>
+						<td th:text="${inquiry.custid}"></td>
+						<th scope="row">작성일</th>
+						<td th:text="${#dates.format(inquiry.rdate, 'yyyy-MM-dd')}"></td>
+					</tr>
+					<tr>
+						<th scope="row">제목</th>
+						<td colspan="3" th:text="${inquiry.icate}"></td>
+					</tr>
+					
+					<tr>
+						<th scope="row">문의내용</th>
+						<td colspan="5" class="view_text" th:text="${inquiry.icontent}"></td>
+					</tr>
+					
+					<tr th:if="${inquiry.file != null}">
+						<th scope="row">첨부파일</th>
+						<td colspan="5"><img id="upimg" th:src="@{/img/upload/}+${inquiry.file}"/></td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="hidden" name="inquiryid" th:value="${inquiry.inquiryid}">
+		</form>
+
+		<span class="send_btn">
+			<button id="back"><a th:href="@{/inquiry}">목록</a></button>
+		</span>
+		<span class="send_btn">
+			<button id="edit"><a th:href="@{/inquiry/inquiryedit(inquiryid=${inquiry.inquiryid})}">수정</a></button>
+		</span>
+		<span class="send_btn">
+			<button id="delete"><a th:href="@{/inquiry/inquirydelete(inquiryid=${inquiry.inquiryid})}">삭제</a></button>
+		</span>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+</body>
+</html>

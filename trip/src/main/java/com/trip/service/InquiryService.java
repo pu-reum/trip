@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.trip.dto.Criteria;
 import com.trip.dto.Inquiry;
 import com.trip.mapper.InquiryMapper;
 
@@ -36,9 +37,13 @@ public class InquiryService{
 	}
 
 	//글 목록
-	public List<Inquiry> selectInquiryList(String custid) throws Exception {
-		return im.selectInquiryList(custid);
+	public List<Inquiry> selectInquiryList(Criteria criteria) throws Exception {
+		return im.selectInquiryList(criteria);
 	}
-
+	
+	//페이지
+	public int getTotalData() {
+		return im.getTotalData();
+	}
 
 }

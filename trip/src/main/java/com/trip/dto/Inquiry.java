@@ -22,7 +22,7 @@ public class Inquiry {
 	private String icate;
 	private String icontent;
 	private String file;
-	private int iprocess;
+	private String iprocess;
 	private Date rdate;
 	
 	private MultipartFile img;
