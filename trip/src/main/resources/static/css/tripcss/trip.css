@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+
+.places{
+	border-style: none;
+	
+}
+
+.places li{
+    float: left;
+    list-style:none;
+    padding: 10px;
+    background : rgb(59, 190, 15);
+    text-align : center;
+    border-left: 1px solid rgb(0, 0, 0) 192, 17;
+    border-left: none;
+}
+ 
+

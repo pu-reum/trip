@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trip.mapper.CalendarMapper">
+	<select id="select" parameterType="String" resultType="Calendar">
+		SELECT *
+		FROM plan WHERE custid=#{custid}
+	</select>
+	<select id="getCalendarAllList" parameterType="String" resultType="Calendar">
+		SELECT * FROM plan
+		WHERE custid = #{custid}
+		AND date_format(planstartdate , '%y%m') = date_format(now() , '%y%m')
+	</select>
+	<insert id="insert" parameterType="Calendar">
+		INSERT 
+		INTO plan(planid , custid , plantitle , planstartdate , planenddate, rdate)
+		VALUES(#{planid},#{custid},#{plantitle},#{planstartdate},#{planenddate}, now())
+	</insert>
+	<update id="update" parameterType="Calendar">
+		UPDATE plan 
+		SET plantitle = #{plantitle}, 
+			planstartdate = #{planstartdate},
+			planenddate = #{planenddate}
+		WHERE planid = #{planid}
+	</update>
+	<delete id="deleteByPlanid" parameterType="Integer">
+		DELETE FROM plan
+		WHERE planid=#{planid}
+	</delete>
+</mapper>

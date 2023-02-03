@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trip.mapper.NoticeMapper">
+	
+	<!-- <sql id="search">
+		<if test="searchKey!=null and searchWord!=null">
+			<trim prefix="("suffix=") AND" prefixOverrides="OR">
+				<foreach item="type" collection="typeArr">
+					<trim prefix="OR">
+						<choose>
+							<when test="type == 'T'.toString()">
+								(TITLE LIKE '%'||#{keyword}||'%')
+							</when>
+							<when test="type == 'C'.toString()">
+								(CONTENT LIKE '%'||#{keyword}||'%')
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+		</if>
+	</sql> -->
+	
+	<select id="selectNoticeList" resultType="Notice">
+		<![CDATA[
+			SELECT x.noid, x.nottitle, x.notice, x.file, x.hit, x.rdate
+			FROM (
+				SELECT @rownum:=@rownum+1 as rn, a.noid, a.nottitle, a.notice, a.file, a.hit, a.rdate
+				FROM(
+					SELECT noid, nottitle, notice, file, hit, rdate
+					FROM notice
+					order by noid DESC) A, (SELECT @rownum:=0)R
+				WHERE @rownum <= #{pageNum}*#{total}) x
+			WHERE x.rn > (#{pageNum}-1)*#{total}
+		]]>
+		
+	</select>
+	<select id="getTotalData" resultType="int">
+		SELECT COUNT(noid) FROM notice
+		<!-- <where>
+			<include refid="search"></include>
+		</where> -->
+	</select>
+	<select id="selectNotice" parameterType="Integer" resultType="Notice">
+		SELECT  noid, nottitle, notice, file,hit, rdate FROM notice WHERE noid=#{noid}
+	</select>
+</mapper>

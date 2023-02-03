@@ -1,0 +1,149 @@
+<h1>여행지</h1>
+<!DOCTYPE HTML>
+
+<head>
+ 	<!--<link rel="stylesheet" href="/style.css">-->
+	<link rel="stylesheet" href="/css/tripcss/trip.css">
+</head>
+<div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+          
+  
+<ul class="places">
+
+	<li><a href="#" style= "color : red" class="home">서울</a></li>
+	<li><a href="#" style= "color : red" class="home">인천</a></li>
+	<li><a href="#">대전</a></li>
+	<li><a href="#">대구</a></li>
+	<li><a href="#">부산</a></li>
+	<li><a href="#">제주</a></li>
+	<li><a href="#">충북</a></li>
+	<li><a href="#">충남</a></li>
+	<li><a href="#">울산</a></li>
+	<li><a href="#">전북</a></li>
+	<li><a href="#">전남</a></li>
+	<li><a href="#">경북</a></li>
+	<li><a href="#">경남</a></li>
+</ul>
+</div>
+ 
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;"></h6>
+                
+               
+                
+       
+       <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;"></h6>
+                <h1>여행 소개</h1>
+            </div>
+            
+            <div>
+          	 	<ul class="sub-title">	
+					<li><a href="#">여행지</a></li>
+					<li><a href="#">맛집</a></li>
+					<li><a href="#">축제</a></li>
+				</ul>     
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" src="/img/festival.jpg" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" href="">
+                            <h5 class="text-white">데이터를 입력하세요.</h5>
+                            <span>상세위치 입력</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" src="/img/festival.jpg" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" href="">
+                            <h5 class="text-white">데이터를 입력하세요.</h5>
+                            <span>상세위치 입력</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" src="/img/festival.jpg" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" href="">
+                             <h5 class="text-white">데이터를 입력하세요.</h5>
+                            <span>상세위치 입력</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" src="/img/festival.jpg" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" href="">
+                            <h5 class="text-white">데이터를 입력하세요.</h5>
+                            <span>상세위치 입력</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" src="/img/festival.jpg" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" href="">
+                             <h5 class="text-white">데이터를 입력하세요.</h5>
+                            <span>상세위치 입력</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" src="/img/festival.jpg" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" href="">
+                            <h5 class="text-white">데이터를 입력하세요.</h5>
+                            <span>상세위치 입력</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+       
+       
+       
+                
+  <!-- 페이지 처리 -->
+<div class="pagesDiv">
+	<ul>
+		<!-- prev버튼 -->
+		<c:if test="${ pvo.nowPage==1 }">
+			<li>prev</li>
+		</c:if>
+		<c:if test="${ pvo.nowPage>1 }">
+			<li><a href='/myapp/board/boardList?nowPage=${ pvo.nowPage-1 }<c:if test="${ pvo.searchValue!=null }">&searchKey=${ pvo.searchKey }&searchValue=${ pvo.searchValue }</c:if>'>prev</a></li>
+		</c:if>
+		<!-- 페이지 번호 출력 -->
+		<c:forEach var="i" begin="${ pvo.startPage }" end="${ pvo.startPage+pvo.pageCount-1 }">
+			<!-- 출력할 페이지번호(i)는 총 페이지 수(pvo.totalPage)보다 작을때까지 출력한다 -->
+			<c:if test="${ i<=pvo.totalPage }">
+				<!-- 현재 페이지 -->
+				<c:if test="${ i==pvo.nowPage }">
+					<li style="background-color:#ddd">${ i }</li>
+				</c:if>
+				<!-- 현재 페이지 아님 -->
+				<c:if test="${ i!=pvo.nowPage }">
+					<li><a href='/myapp/board/boardList?nowPage=${ i }<c:if test="${ pvo.searchValue!=null }">&searchKey=${ pvo.searchKey }&searchValue=${ pvo.searchValue }</c:if>'>${ i }</a></li>
+				</c:if>
+			</c:if>
+		</c:forEach>
+		<!-- next버튼 -->
+		<c:if test="${ pvo.nowPage==pvo.totalPage }">
+			<li>next</li>
+		</c:if>
+		<c:if test="${ pvo.nowPage<pvo.totalPage }">
+			<li><a href='/myapp/board/boardList?nowPage=${ pvo.nowPage+1 }<c:if test="${ pvo.searchValue!=null }">&searchKey=${ pvo.searchKey }&searchValue=${ pvo.searchValue }</c:if>'>next</a></li>
+		</c:if>
+	</ul>
+</div>
+
+     </div>
+        </div>
+    </div>

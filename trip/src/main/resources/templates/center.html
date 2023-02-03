@@ -1,0 +1,140 @@
+<style>
+hr{
+	margin-top:0;
+}
+</style>
+<!-- Carousel Start -->
+    <div class="container-fluid p-0">
+        <div id="header-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" th:src="@{/img/trip.jpg}" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h4 class="text-white text-uppercase mb-md-3">이달의 여행지</h4>
+                            <a href=""><h1 class="display-3 text-white mb-md-4">부산 광안리</h1></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" th:src="@{/img/food.jpg}" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h4 class="text-white text-uppercase mb-md-3">이달의 맛집</h4>
+                            <a href=""><h1 class="display-3 text-white mb-md-4">부산 할매국밥</h1></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" th:src="@{/img/festival.jpg}" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h4 class="text-white text-uppercase mb-md-3">이달의 축제</h4>
+                            <a href=""><h1 class="display-3 text-white mb-md-4">송도 달집축제</h1></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-prev-icon mb-n2"></span>
+                </div>
+            </a>
+            <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-next-icon mb-n2"></span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- Carousel End -->
+    <hr>
+    <!-- Destination Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                
+                <h2>여행콕콕</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" th:src="@{/img/haeundaebeach.jpg}" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" th:href="@{/course/course1}">
+                            <h5 class="text-white">부산</h5>
+                            <span>해운대 코스</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" th:src="@{/img/taejongdae.jpg}" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" th:href="@{/course/course2}">
+                            <h5 class="text-white">부산</h5>
+                            <span>태종대 코스</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" th:src="@{/img/gwanga.jpg}" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" th:href="@{/course/course3}">
+                            <h5 class="text-white">부산</h5>
+                            <span>광안리 코스</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" th:src="@{/img/hamduk.jpg}" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" th:href="@{/course/course4}">
+                            <h5 class="text-white">제주도</h5>
+                            <span>바다 코스</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" th:src="@{/img/darang.jpg}" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" th:href="@{/course/course5}">
+                            <h5 class="text-white">제주도</h5>
+                            <span>산 코스</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" th:src="@{/img/borom.jpg}" alt="">
+                        <a class="destination-overlay text-white text-decoration-none" th:href="@{/course/course6}">
+                            <h5 class="text-white">제주도</h5>
+                            <span>꽃 코스</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Destination Start -->
+    <hr>
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-lg-6" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100" th:src="@{/img/guzo.jpg}" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-6 pt-5 pb-lg-5">
+                    <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
+                        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">About Us</h6>
+                        <h1 class="mb-3">일상에서구조</h1>
+                        <p>저희 사이트에서는 다양한 여행코스를 추천받을 수 있습니다.<br>
+                         	여행지, 맛집, 축제 등 다양한 정보를 공유하고, 추천받아 일정을 세워보세요.</p>
+                        <!-- <a href="" class="btn btn-primary mt-1"></a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->

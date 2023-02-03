@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
+<link href="starter-template.css" rel="stylesheet"/>
+
+<title>Insert title here</title>
+<script>
+$(document).ready(function(){
+	 $("#noticelist").on("click", function(){
+        location.href = "notice";
+    });
+});
+</script>
+</head>
+<body>
+<div class="container">
+<h2>상세 화면</h2>
+		<form id="form" method="post">
+		
+	    	<table class="notice_view">
+				<colgroup>
+					<col width="15%"/>
+					<col width="35%"/>
+					<col width="15%"/>
+					<col width="35%"/>
+				</colgroup>
+				<caption>상세내용</caption>
+				<tbody>
+					<tr>
+						<th scope="row">글 번호</th>
+						<td th:text="${notice.noid}"></td>
+						<th scope="row">조회수</th>
+						<td th:text="${notice.hit}"></td>
+					</tr>
+					<tr>
+						<th scope="row">작성일</th>
+						<td th:text="$notice.rdate}"></td>
+					</tr>
+					<tr>
+						<th scope="row">제목</th>
+						<td colspan="3">
+							<input type="text" id="nottitle" name="nottitle" 
+								th:value="${notice.nottitle}"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" class="view_text">
+							<textarea title="내용" id="content" name="content" 
+								th:text="${notice.content}"></textarea>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			 <input type="hidden" name="noid" th:value="${notice.noid}">
+		</form>
+			<input type="button" id="noticelist" value="돌아가기">
+		
+	</div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

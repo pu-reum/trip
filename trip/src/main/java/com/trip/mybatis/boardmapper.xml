@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trip.mapper.BoardMapper">
+	 
+	<select id="selectBoardList" resultType="Board">
+		SELECT postid, custid, title, content, hit, rdate, catename FROM board ORDER BY postid desc
+	</select>
+	
+	<update id="updateHitCount" parameterType="int">
+		UPDATE board SET hit=hit+1 WHERE postid=${postid}
+	</update>
+	
+	<select id="selectBoard" parameterType="int" resultType="Board">
+		SELECT  postid, catename, custid, title, hit, content, rdate, catename FROM board WHERE postid=${postid}
+	</select>
+
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO board(postid, custid, title, content, rdate, catename, hit) VALUES(NULL, #{custid}, #{title}, #{content}, NOW(), #{catename}, #{hit})
+	</insert>
+	
+	<update id="updateBoard">
+		UPDATE board SET catename=#{catename}, title=#{title}, content=#{content} WHERE postid=#{postid} AND custid=#{custid}
+	</update>
+	
+	<delete id="deleteBoard">
+		DELETE FROM board WHERE postid=#{postid} AND custid=#{custid}
+	</delete> 
+ </mapper>
