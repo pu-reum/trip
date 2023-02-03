@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admin.mapper.CustMapper">
+
+	<select id="insert" parameterType="Cust">
+		INSERT INTO cust VALUES (#{custid}, #{custpwd}, #{custname}, #{custnick}, #{custphone}, #{custemail}, NOW())
+	</select>
+	<select id="delete" parameterType="String">
+		DELETE FROM cust WHERE custid=#{custid}
+	</select>
+	<select id="update" parameterType="Cust">
+		UPDATE cust SET custpwd=#{custpwd}, custname=#{custname}, custnick=#{custnick}, custphone=#{custphone}, custemail=#{custemail} WHERE custid=#{custid}
+	</select>
+	<select id="select" parameterType="String" resultType="Cust">
+		SELECT * FROM cust WHERE custid=#{custid}
+	</select>
+	<select id="selectall" resultType="Cust">
+		SELECT * FROM cust
+	</select>
+	<select id="select2" parameterType="String" resultType="Cust">
+		SELECT * FROM cust WHERE custnick=#{custnick}
+	</select>
+	<select id="select3" parameterType="String" resultType="Cust">
+		SELECT * FROM cust WHERE custemail=#{custemail}
+	</select>
+	<select id="login" parameterType="String" resultType="Cust">
+		SELECT * FROM cust WHERE custid=#{param1} AND custpwd=#{param2}
+	</select>
+	<select id="searchPwd" parameterType="String" resultType="Cust">
+		SELECT * FROM cust WHERE custid=#{param1} AND custemail=#{param2}
+	</select>
+	
+</mapper>
