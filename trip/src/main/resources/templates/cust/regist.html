@@ -1,0 +1,345 @@
+
+<!-- Main css -->
+    <link rel="stylesheet" th:href="@{/css/custcss/style.css}">
+
+<!-- JS -->
+    <script th:src="@{js/jquery.min.js}"></script>
+    <script th:src="@{js/main.js}"></script>
+
+<style>
+
+</style>
+
+<script>
+	var number=null;
+	var check=false;
+	var check1=true;
+	var check2=true;
+	var check3=false;
+	
+	function checkAll(){
+		var id=$('#id').val();
+		var nick=$('#nick').val();
+		var name=$('#name').val();
+		var pass1=$('#pass').val();
+		var pass2=$('#re_pass').val();
+		var phone=$('#phone').val();
+		var email=$('#email').val();
+		
+		if(!checkId(id)){
+			check=false;
+		}else if(!checkPassword(pass1,pass2)){
+			check=false;
+		}else if(!checkName(name)){
+			check=false;
+		}else if(!checkNick(nick)){
+			check=false;
+		}else if(!checkEmail(email)){
+			check=false;
+		}else if(!checkPhone(phone)){
+			check=false;
+		}else if(!check1){
+			$('#idspan').attr('style','color:red;');
+			$('#idspan').text('Not Available');
+			check=false;
+		}else if(!check2){
+			$('#nickspan').attr('style','color:red;');
+			$('#nickspan').text('Not Available');
+			check=false;
+		}else if(!check3){
+			$('#email-confirm-span').attr('style','color:red;');
+			$('#email-confirm-span').text('Email authentication required');
+			check=false;
+		}else{
+			check=true;
+		};
+
+		return check;
+	};
+	
+	// id 유효성 검사
+	function checkId(id) {
+ 		
+        var idRegExp = /^[a-zA-Z0-9]{4,12}$/;
+        
+        if (!idRegExp.test(id)) {
+        	$('#idspan').attr('style','color:red;');
+        	$('#idspan').text('Not Available');
+        	return false;
+        	
+        }else{
+        	$('#idspan').attr('style','color:blue;');
+        	$('#idspan').text('Available');
+        	check1=true;
+        	return true;
+        };
+    };
+	
+	// password 유효성 검사
+	function checkPassword(pass1,pass2){
+		
+		var passRegExp=/^[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,20}$/;
+		
+		if(pass1==null || pass1=='' || pass2==null || pass2==''){
+			$('#passspan').attr('style','color:red;');
+			$('#passspan').text('Not Available');
+			return false;
+		}else if(pass1!=pass2){
+			$('#passspan').attr('style','color:red;');
+			$('#passspan').text('Not Same');
+			return false;
+		}else if(!passRegExp.test(pass1)){
+			$('#passspan').attr('style','color:red;');
+			$('#passspan').text('Not Available');
+			return false;
+		}else{
+			$('#passspan').attr('style','color:blue;');
+			$('#passspan').text('Available');
+			return true;
+		};
+		
+	};
+	
+	// name 유효성 검사
+	function checkName(name) {
+        
+		var nameRegExp=/^[가-힣]{2,4}$/;
+		
+        if (name==null || name=='') {
+        	$('#namespan').attr('style','color:red;');
+        	$('#namespan').text('Not Available');
+        	return false;
+        }else if(!nameRegExp.test(name)){
+        	$('#namespan').attr('style','color:red;');
+        	$('#namespan').text('Not Available');
+        	return false;
+		}else{
+			$('#namespan').attr('style','color:blue;');
+        	$('#namespan').text('Available');
+        	return true;	
+        };
+        
+    };
+	
+	// nick 유효성 검사
+	function checkNick(nick) {
+        
+        if (nick==null || nick=='') {
+        	$('#nickspan').attr('style','color:red;');
+        	$('#nickspan').text('Not Available');
+        	return false;
+        }else{
+        	$('#nickspan').attr('style','color:blue;');
+        	$('#nickspan').text('Available');
+        	check2=true;
+        	return true;
+        }
+    };
+	
+    // phone 유효성 검사
+	function checkPhone(phone){
+		var phoneRegExp= /^(070|02|0[1-9]{1}[0-9]{1})[0-9]{3,4}[0-9]{4}$/;
+		
+		if(phone=='' || phone==null){
+			$('#phonespan').attr('style','color:red;');
+        	$('#phonespan').text('Not Available');
+        	return false;
+		}else if(!phoneRegExp.test(phone)){
+			$('#phonespan').attr('style','color:red;');
+        	$('#phonespan').text('Not Available');
+        	return false;
+		}else{
+			$('#phonespan').attr('style','color:blue;');
+        	$('#phonespan').text('Available');
+        	return true;
+		};
+		
+		
+	};
+	
+	// email 유효성 검사
+	function checkEmail(email){
+		
+		var emailRegExp=/^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+		
+		if(email=='' || email==null){
+			$('#emailspan').attr('style','color:red;');
+        	$('#emailspan').text('Not Available');
+			return false;
+		}else if(!emailRegExp.test(email)){
+			$('#emailspan').attr('style','color:red;');
+        	$('#emailspan').text('Not Available');
+			return false;
+		}else{
+			$('#emailspan').attr('style','color:blue;');
+        	$('#emailspan').text('Available');
+			return true;
+		};
+	};
+	
+	// email 인증번호
+	function emailNumber(data){
+		if(data!=0){
+			number=data;
+			$('#emailspan').attr('style','color:blue;');
+        	$('#emailspan').text('Available');
+		}else{
+			$('#emailspan').attr('style','color:red;');
+        	$('#emailspan').text('Not Available');
+        	check3=false;
+		}
+		
+	}
+	
+	// email 인증번호 확인
+	function checkEmailNumber(data){
+		if(data=1){
+			$('#email-confirm-span').attr('style','color:blue;');
+			$('#email-confirm-span').text('Email Authentication Completed');
+			$('#email').attr('readonly', 'readonly');
+			check3=true;
+		}else{
+			$('#email-confirm-span').attr('style','color:red;');
+			$('#email-confirm-span').text('Email authentication failed');
+			check3=false;
+		}
+	}
+	
+
+	$(document).ready(function(){
+		
+		// id 중복검사
+		$('#id').keyup(function(){
+			var id=$(this).val();
+			$.ajax({
+				url:'[[@{/checkid}]]',
+				data:{'cid':id},
+				success:function(result){
+					if(result==1){
+						$('#idspan').attr('style','color:red;');
+						$('#idspan').text('Not Available');
+						check1=false;
+					}else{
+						checkId(id);
+					}
+				}
+			});
+			
+		});
+		
+		// 닉네임 중복검사
+		$('#nick').keyup(function(){
+			var nick=$(this).val();
+			$.ajax({
+				url:'[[@{/checknick}]]',
+				data:{'cnick':nick},
+				success:function(result){
+					if(result==1){
+						$('#nickspan').attr('style','color:red;');
+						$('#nickspan').text('Not Available');
+						check2=false;
+					}else{
+						checkNick(nick);
+					}
+				}
+			});
+			
+		});
+		
+		// 이메일 인증번호 보내기
+		$('#email-confirm').click(function(){
+			var email=$('#email').val();
+			$('#anumber').attr('style','display:inline');
+			
+			$.ajax({
+				url:'[[@{/checkemail}]]',
+				data:{'email':email},
+				success:function(data){
+					emailNumber(data);
+					
+				}
+			});
+			
+		});
+		
+		// 이메일 인증번호 확인
+		$('#anumber').keyup(function(){
+			var anumber=$(this).val();
+			
+			$.ajax({
+				url:'[[@{/checkanumber}]]',
+				data:{'anumber':anumber,'number':number},
+				success:function(data){
+					checkEmailNumber(data)
+				}
+			});
+		});
+		
+	});
+	
+	
+	
+</script>
+
+<div class="main">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form method="post" action="/registimpl" class="register-form" id="register-form" onsubmit="return checkAll()">
+                            <div class="form-group">
+                                <input type="text" name="custid" id="id" placeholder="Your Id (영문자,숫자 4~12)"/><dr>
+                            	<span id="idspan"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="custpwd" id="pass" placeholder="Password (영문자,숫자,특수문자 8~20)"/>
+                                <span id="passspan"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="custpwd2" id="re_pass" placeholder="Repeat your password"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="custname" id="name" placeholder="Your Name"/>
+                                <span id="namespan"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="custnick" id="nick" placeholder="Your NickName"/>
+                                <span id="nickspan"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="custphone" id="phone" placeholder="Your PhoneNumber ( - skip)"/>
+                                <span id="phonespan"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="custemail" id="email" placeholder="Your Email"/>
+                                <span id="emailspan"></span>
+                            </div>
+                             <div class="form-group" >
+                                <input type="text" name="anumber" id="anumber" placeholder="email authentication number" style="display:none;"/>
+                            </div>
+                            <div class="form-group">
+                                <span id="email-confirm-span"></span>
+                            </div>
+                            <div class="form-group form-button" >
+                                <input type="button" id="email-confirm" class="email-confirm" value="email-confirm"/>
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image" align="center">
+                        <figure>
+                        	<img th:src="@{/img/regist.jpg}">
+                        	<a href="#loginModal" data-toggle="modal" class="signup-image-link" style="color:red;">I am already member</a>
+                        </figure>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+</div>
+
+    
