@@ -17,8 +17,7 @@
 	</insert>
 	<update id="update" parameterType="Calendar">
 		UPDATE plan 
-		SET plantitle = #{plantitle}, 
-			planstartdate = #{planstartdate},
+		SET planstartdate = #{planstartdate},
 			planenddate = #{planenddate}
 		WHERE planid = #{planid}
 	</update>

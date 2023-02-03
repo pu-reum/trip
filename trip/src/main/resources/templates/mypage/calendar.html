@@ -137,9 +137,8 @@ html, body {
 												eventDrop : function(obj) { // 이벤트가 수정되면 발생하는 이벤트
 												if(confirm("'"+obj.event.title +"' 일정을 수정하시겠습니까?")){
 													
-													var planid = obj.event.id;
 													var calendar = {
-															plantitle : obj.event.title,
+															planid : obj.event.id,
 															planstartdate : obj.event.start,
 															planenddate : obj.event.end
 													}
@@ -152,15 +151,13 @@ html, body {
 														method : "put",
 														dataType : "json",
 														data : JSON
-																.stringify(planid)
+																.stringify(calendar)
 													});
 													
 													request.done(function(data){
-														
+														alert('수정되었습니다.');
 													})
 													console.log("eventChange");
-													alert('수정되었습니다.');
-													
 												 }
 												},
 												eventClick : function(obj) { // 이벤트가 삭제되면 발생하는 이벤트
