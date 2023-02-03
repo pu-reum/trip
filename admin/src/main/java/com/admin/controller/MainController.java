@@ -52,6 +52,8 @@ public class MainController {
 	
 	@RequestMapping("/profile")
 	public String profile(Admin admin, HttpSession session, Model model) {
+		//admin=(Admin) session.getAttribute("loginAdmin");
+		//model.addAttribute("admin", admin);
 		model.addAttribute("center", "profile");
 		return "index";
 	}
@@ -70,7 +72,6 @@ public class MainController {
 		}else {
 			model.addAttribute("center", "fail/access-limit");
 		}
-		
 		
 		return "index";
 	}
@@ -111,18 +112,37 @@ public class MainController {
 	}
 	
 	@RequestMapping("/editimpl")
-	public String editimpl(Model model, Admin admin) {
-		System.out.println(admin.toString());
+	public String editimpl(Model model, Admin admin, HttpSession session) {
+		Admin admin2=null;
+		admin2=(Admin)session.getAttribute("loginAdmin");
+		admin.setAdpwd(admin2.getAdpwd());
 		try {
 			aservice.modify(admin);
-			System.out.println("ok");
 			model.addAttribute("center", "profile");
+			session.setAttribute("loginAdmin", admin);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("fail");
 			model.addAttribute("center", "fail/error");
 		}
 	
+		return "index";
+	}
+	
+	@RequestMapping("/passeditimpl")
+	public String passeditimpl(Model model, Admin admin, HttpSession session) {
+		Admin admin2=null;
+		admin2=(Admin)session.getAttribute("loginAdmin");
+		admin2.setAdpwd(admin.getAdpwd());
+		
+		try {
+			aservice.modify(admin2);
+			model.addAttribute("center", "profile");
+			session.setAttribute("loginAdmin", admin2);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("center", "fail/error");
+		}
+		
 		return "index";
 	}
 }
