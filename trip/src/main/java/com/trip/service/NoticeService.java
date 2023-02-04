@@ -21,6 +21,8 @@ public class NoticeService {
 	}
 	//상세 보기
 	public Notice selectNotice(int noid) throws Exception {
+		nmp.updateHitCount(noid);
+		Notice notice = nmp.selectNotice(noid);
 		return nmp.selectNotice(noid);
 	}
 	//페이지네이션

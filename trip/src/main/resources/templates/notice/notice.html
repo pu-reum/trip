@@ -94,18 +94,7 @@
 }
 </style>
 <script>
-//페이지 이동
-function movePage(page) {
-    const form = document.getElementById('#search-Form');
-    const queryParams = {
-          page: (page) ? page : 1
-        , recordSize: 10
-        , pageSize: 10
-        , searchType: form.searchType.value
-        , keyword: form.keyword.value
-    }
-    location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
-}
+
 </script>
 </head>
 <body>
@@ -124,14 +113,14 @@ function movePage(page) {
 									<div class="row no-gutters">
 										<div class="col-lg-3 col-md-3 col-sm-12 p-0">
 											<label for="search-type" hidden>유형</label> 
-											<select class="form-control" id="search-type" name="search-type">
-												<option value="title">제목</option>
-												<option value="content">본문</option>
+											<select class="form-control" id="searchKey" name="searchKey">
+												<option value="nottitle">제목</option>
+												<option value="notice">본문</option>
 											</select>
 										</div>
 										<div class="col-lg-8 col-md-6 col-sm-12 p-0">
-											<label for="search-value" hidden>검색어</label> 
-											<input type="text" placeholder="검색어를 입력하세요" class="form-control" id="search" name="search">
+											<label for="searchWord" hidden>검색어</label> 
+											<input type="text" placeholder="검색어를 입력하세요" class="form-control" id="searchWord" name="searchWord">
 										</div>
 										<div class="col-lg-1 col-md-3 col-sm-12 p-0">
 											<button type="submit" class="btn btn-base">
@@ -181,24 +170,25 @@ function movePage(page) {
 		<div class="row" th:object="${pageMaker}">
         
         	
-           
-            <div class="big-width">
-                <a class="changePage" th:if="*{prev}" th:href="*{startPage-1}"><code>prev</code></a>
+           <a class="page-link" th:if="*{criteria.pageNum>1}" th:href="@{/notice(pageNum=*{criteria.pageNum-1})}">
+               		<code>PREV</code></a>
+               		
+                <a class="page-link" th:if="*{prev}" th:href="*{startPage-1}"><code>prev</code></a>
+                
                 <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
-                	<code th:if="${pageMaker.criteria.getPageNum()==num}" th:text="${num}"></code>
-                	<a class="changePage" th:unless="${pageMaker.criteria.getPageNum()==num}" th:href="${num}">
+                
+                	<a class="page-link" th:if="${pageMaker.criteria.getPageNum()==num}" th:text="${num}" style="color:black;"></a>
+                	
+                	<a class="page-link" th:unless="${pageMaker.criteria.getPageNum()==num}" th:href="@{/notice(pageNum=${num})}">
                 		<code th:text="${num}"></code></a>	
+                		
                 </th:block>
-                <a class="changePage" th:if="*{next}" th:href="*{endPage +1}">
-                	<code>next</code></a>
-               </div>
-               <div class="small-width">
-               	<a class="change" th:if="*{criteria.pageNum>1}" th:href="@{/notice(pageNum=*{criteria.pageNum-1})}">
-               		<code>prev</code></a>
-               	<code th:text="*{criteria.pageNum}"></code>
-               	<a class="changePage" th:if="*{criteria.pageNum<end}" th:href="@{/notice(pageNum=*{criteria.pageNum+1})}">
-               		<code>next</code></a>
-               </div>
+               
+               	
+               	<!-- <code th:text="*{criteria.pageNum}"></code> -->
+               	<a class="page-link" th:if="*{criteria.pageNum<end}" th:href="@{/notice(pageNum=*{criteria.pageNum+1})}">
+               		<code>NEXT</code></a>
+             
                <form action="/notice" th:object="${criteria}" name="pageForm">
                	<input type="hidden" name="pageNum" th:field="*{pageNum}">
                	<input type="hidden" name="total" th:field="*{total}">

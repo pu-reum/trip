@@ -38,11 +38,11 @@ public class NoticeController {
 	
 	//글 상세보기
 	@GetMapping("/noticeview")
-	public String noticeview(Integer noid, Model model) throws Exception {
+	public String noticeview(int noid, Model model) throws Exception {
 		Notice notice = ns.selectNotice(noid);
-		//model.addAttribute("notice", ns.selectNotice(noid));
+		
 		model.addAttribute("notice", notice);
 		model.addAttribute("center", dir+"noticeview");
-		return "noticeview";
+		return "index";
 	}
 }

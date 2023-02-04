@@ -4,25 +4,6 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trip.mapper.NoticeMapper">
 	
-	<!-- <sql id="search">
-		<if test="searchKey!=null and searchWord!=null">
-			<trim prefix="("suffix=") AND" prefixOverrides="OR">
-				<foreach item="type" collection="typeArr">
-					<trim prefix="OR">
-						<choose>
-							<when test="type == 'T'.toString()">
-								(TITLE LIKE '%'||#{keyword}||'%')
-							</when>
-							<when test="type == 'C'.toString()">
-								(CONTENT LIKE '%'||#{keyword}||'%')
-							</when>
-						</choose>
-					</trim>
-				</foreach>
-			</trim>
-		</if>
-	</sql> -->
-	
 	<select id="selectNoticeList" resultType="Notice">
 		<![CDATA[
 			SELECT x.noid, x.nottitle, x.notice, x.file, x.hit, x.rdate
@@ -31,17 +12,27 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 				FROM(
 					SELECT noid, nottitle, notice, file, hit, rdate
 					FROM notice
+				]]>
+					<if test="searchWord != null">
+						where ${searchKey} like '%${searchWord}%'
+					</if>
+					<![CDATA[
 					order by noid DESC) A, (SELECT @rownum:=0)R
 				WHERE @rownum <= #{pageNum}*#{total}) x
 			WHERE x.rn > (#{pageNum}-1)*#{total}
-		]]>
-		
+			]]>
 	</select>
+	
+	<update id="updateHitCount" parameterType="int">
+		UPDATE notice SET hit=hit+1 WHERE noid=${noid}
+	</update>
+	
 	<select id="getTotalData" resultType="int">
 		SELECT COUNT(noid) FROM notice
-		<!-- <where>
-			<include refid="search"></include>
-		</where> -->
+		<if test="searchWord!=null">
+			where ${searchKey} like '%${searchWord}%'
+		</if>
+
 	</select>
 	<select id="selectNotice" parameterType="Integer" resultType="Notice">
 		SELECT  noid, nottitle, notice, file,hit, rdate FROM notice WHERE noid=#{noid}

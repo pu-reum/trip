@@ -16,6 +16,8 @@ public interface NoticeMapper {
 		List<Notice> selectNoticeList(Criteria criteria) throws Exception;
 		//글 보기
 		Notice selectNotice(int noid) throws Exception;
+		//조회수
+		void updateHitCount(int noid) throws Exception;
 		//페이지네이션
 		int getTotalData();
 		//검색어 처리
