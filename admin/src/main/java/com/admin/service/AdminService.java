@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.admin.dto.Admin;
+import com.admin.dto.Criteria;
+import com.admin.dto.Cust;
 import com.admin.frame.MyService;
 import com.admin.mapper.AdminMapper;
 
@@ -47,7 +49,13 @@ public class AdminService implements MyService<String, Admin>{
 		return mapper.login(k,t);
 	}
 
+	public List<Admin> getAdminList(Criteria criteria) throws Exception{
+		return mapper.getAdminList(criteria);
+	}
 	
+	public int getTotalData(Criteria criteria) throws Exception{
+		return mapper.getTotalData(criteria);
+	}
 	
 	
 }

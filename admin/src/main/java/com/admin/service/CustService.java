@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.admin.dto.Criteria;
 import com.admin.dto.Cust;
 import com.admin.frame.MyService;
 import com.admin.mapper.CustMapper;
@@ -60,6 +61,13 @@ public class CustService implements MyService<String, Cust>{
 		return mapper.searchPwd(k,j);
 	}
 	
+	public List<Cust> getCustList(Criteria criteria) throws Exception{
+		return mapper.getCustList(criteria);
+	}
+	
+	public int getTotalData(Criteria criteria) throws Exception{
+		return mapper.getTotalData(criteria);
+	}
 	
 	
 	

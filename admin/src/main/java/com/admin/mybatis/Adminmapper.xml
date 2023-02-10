@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM admin WHERE adid=#{adid}
 	</select>
 	<select id="update" parameterType="Admin">
-		UPDATE admin SET adpwd=#{adpwd}, adname=#{adname}, ademail=#{ademail} WHERE adid=#{adid}
+		UPDATE admin SET adpwd=#{adpwd}, adname=#{adname}, ademail=#{ademail}, adlev=#{adlev} WHERE adid=#{adid}
 	</select>
 	<select id="select" parameterType="String" resultType="Admin">
 		SELECT * FROM admin WHERE adid=#{adid}
@@ -23,5 +23,34 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM admin WHERE adid=#{param1} AND adpwd=#{param2}
 	</select>
 	
+	<select id="getAdminList" resultType="Admin">
+		
+			SELECT adid, adname, ademail, adlev
+			FROM admin
+					<if test="searchWord != null">
+						<if test="searchKey=='id'">
+							WHERE adid LIKE CONCAT('%', #{searchWord}, '%')
+						</if>
+						<if test="searchKey=='name'">
+							WHERE adname LIKE CONCAT('%', #{searchWord}, '%')
+						</if> 
+					</if>
+					
+			order by adlev DESC
+				
+			
+	</select>
+	
+	<select id="getTotalData" resultType="int">
+		SELECT COUNT(adid) FROM admin
+		<if test="searchWord!=null and searchWord!=''">
+			<if test="searchKey=='id'">
+				WHERE adid like CONCAT('%', #{searchWord}, '%')
+			</if>
+			<if test="searchKey=='name'">
+				WHERE adname like CONCAT('%', #{searchWord}, '%')
+			</if>
+		</if>
+	</select>
 	
 </mapper>

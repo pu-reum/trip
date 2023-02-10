@@ -17,19 +17,50 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM cust WHERE custid=#{custid}
 	</select>
 	<select id="selectall" resultType="Cust">
-		SELECT * FROM cust
+		SELECT custid, custpwd, custname, custnick, custphone, custemail, rdate FROM cust
 	</select>
-	<select id="select2" parameterType="String" resultType="Cust">
-		SELECT * FROM cust WHERE custnick=#{custnick}
+
+	
+	<select id="msearchId" parameterType="String" resultType="Cust">
+		SELECT * FROM cust WHERE custid LIKE CONCAT('%', #{param1}, '%')
 	</select>
-	<select id="select3" parameterType="String" resultType="Cust">
-		SELECT * FROM cust WHERE custemail=#{custemail}
+	<select id="msearchName" parameterType="String" resultType="Cust">
+		SELECT * FROM cust WHERE custname LIKE CONCAT('%', #{param1}, '%')
 	</select>
-	<select id="login" parameterType="String" resultType="Cust">
-		SELECT * FROM cust WHERE custid=#{param1} AND custpwd=#{param2}
+	
+	<select id="getCustList" resultType="Cust">
+		SELECT custid, custname, custnick, custphone, custemail, rdate 
+		FROM cust
+		<if test="searchWord!=null">
+			<if test="searchKey=='id'">
+				WHERE custid LIKE CONCAT('%', #{searchWord}, '%')
+			</if>
+			<if test="searchKey=='name'">
+				WHERE custname like CONCAT('%', #{searchWord}, '%')
+			</if> 
+		</if>
+	
 	</select>
-	<select id="searchPwd" parameterType="String" resultType="Cust">
-		SELECT * FROM cust WHERE custid=#{param1} AND custemail=#{param2}
+	
+	<select id="getTotalData" resultType="int">
+		SELECT COUNT(custid) FROM cust
+		<if test="searchWord!=null and searchWord!=''">
+			<if test="searchKey=='id'">
+				WHERE custid like CONCAT('%', #{searchWord}, '%')
+			</if>
+			<if test="searchKey=='name'">
+				WHERE custname like CONCAT('%', #{searchWord}, '%')
+			</if>
+		</if>
 	</select>
 	
 </mapper>
+
+
+
+
+
+
+
+
+

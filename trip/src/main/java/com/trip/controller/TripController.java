@@ -10,7 +10,7 @@ public class TripController {
 	
 	String dir = "trip/";
 	
-	@RequestMapping("/trip")
+	@RequestMapping("/trip1")
 	public String trip(Model model) {
 		model.addAttribute("center", dir+"trip");
 		return "index";

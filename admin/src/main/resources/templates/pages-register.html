@@ -35,6 +35,35 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+<script>
+	function checkAll(){
+		var id=$('#yourUsername').val();
+		var id=$('#yourPassword').val();
+		var id=$('#yourEmail').val();
+		var id=$('#yourName').val();
+		
+		if(!checkId(id)){
+			return false;	
+		};
+		
+		return true;
+	};
+	
+	// id 유효성 검사
+	function checkId(id) {
+ 		
+        var idRegExp = /^[a-zA-Z0-9]{4,12}$/;
+        
+        if (!idRegExp.test(id)) {
+        	return false;
+        }else{
+        	return true;
+        };
+    };
+	
+
+</script>
+
 </head>
 
 <body>
@@ -63,7 +92,7 @@
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" th:action="@{/registerimpl}" novalidate>
+                  <form class="row g-3 needs-validation" th:action="@{/registerimpl}" onsubmit="return checkAll()">
                     <div class="col-12">
                       <label for="yourName" class="form-label">Your Name</label>
                       <input type="text" name="adname" class="form-control" id="yourName" required>

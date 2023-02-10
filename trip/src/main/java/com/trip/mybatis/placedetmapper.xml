@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trip.mapper.PlacedetMapper">
+
+	<select id="insert" parameterType="Placedet">
+		INSERT INTO placedet 
+		VALUES (NULL, #{cateid}, #{pdname}, #{pddesc}, #{pdaddr}, #{imgname1}, #{imgname2}, #{imgname3}, #{imgname4}, #{imgname5}, #{pddate}, #{lat}, #{lng}, #{pdlike}, #{hit}, NOW())
+	</select>
+	<select id="delete" parameterType="Integer">
+		DELETE FROM cust WHERE custid=#{custid}
+	</select>
+	<!-- <select id="update" parameterType="Placedet">
+		UPDATE placedet SET custpwd=#{custpwd}, custname=#{custname}, custnick=#{custnick}, custphone=#{custphone}, custemail=#{custemail} WHERE pdid=#{pdid}
+	</select> -->
+	<select id="select" parameterType="Integer" resultType="Placedet">
+		SELECT * FROM placedet WHERE pdid=#{pdid}
+	</select>
+	<select id="selectall" resultType="Placedet">
+		SELECT * FROM placedet
+	</select>
+	
+</mapper>

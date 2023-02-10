@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.admin.dto.Admin;
+import com.admin.dto.Criteria;
 import com.admin.dto.Cust;
+import com.admin.dto.Page;
 import com.admin.service.AdminService;
 import com.admin.service.CustService;
 
@@ -50,6 +52,17 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping("/mremove")
+	public String mremove(String custid) {
+		try {
+			cservice.remove(custid);
+		} catch (Exception e) {
+			e.getStackTrace();
+			System.out.println("fail");
+		}
+		return "redirect:/member-inf-manage";
+	}
+	
 	@RequestMapping("/profile")
 	public String profile(Admin admin, HttpSession session, Model model) {
 		//admin=(Admin) session.getAttribute("loginAdmin");
@@ -59,16 +72,53 @@ public class MainController {
 	}
 	
 	@RequestMapping("/member-inf-manage")
-	public String manage(Model model, Cust cust, HttpSession session) {
-		List<Cust> list=null;
+	public String cmanage(Model model, Criteria criteria, HttpSession session) {
 		if(session.getAttribute("loginAdmin")!=null) {
+			//System.out.println(criteria.toString());
 			try {
-				list=cservice.get();
-				model.addAttribute("mlist", list);
+				
+				List<Cust> list=cservice.getCustList(criteria);
+				model.addAttribute("list", list);
+				System.out.println(list.toString());
+				model.addAttribute("pageMaker", new Page(cservice.getTotalData(criteria), 5, criteria));
+				//Page maker=new Page(cservice.getTotalData(criteria), 5, criteria);
+				//System.out.println(maker.toString());
 				model.addAttribute("center", "mimanage");
-			} catch (Exception e) {
-				e.printStackTrace();
+			}catch(Exception e) {
+				e.getStackTrace();
+				e.getMessage();
+				model.addAttribute("center", "fail/error");
 			}
+		}else {
+			model.addAttribute("center", "fail/access-limit");
+		}
+		
+		return "index";
+	}
+	
+	@RequestMapping("/admin-inf-manage")
+	public String amanage(Model model, HttpSession session, Criteria criteria) {
+		Admin admin=null;
+		if(session.getAttribute("loginAdmin")!=null) {
+			admin=(Admin)session.getAttribute("loginAdmin");
+
+			int lev=admin.getAdlev();
+			if(lev==3) {
+				try {
+					List<Admin> list=aservice.getAdminList(criteria);
+					model.addAttribute("list", list);
+					model.addAttribute("pageMaker", new Page(cservice.getTotalData(criteria), 5, criteria));
+					model.addAttribute("center", "aimanage");
+				} catch (Exception e) {
+					model.addAttribute("center", "fail/error");
+					System.out.println("fail1");
+					e.printStackTrace();
+				}
+			}else {
+				System.out.println("fail2");
+				model.addAttribute("center", "fail/access-limit");
+			}
+		
 		}else {
 			model.addAttribute("center", "fail/access-limit");
 		}
@@ -133,7 +183,6 @@ public class MainController {
 		Admin admin2=null;
 		admin2=(Admin)session.getAttribute("loginAdmin");
 		admin2.setAdpwd(admin.getAdpwd());
-		
 		try {
 			aservice.modify(admin2);
 			model.addAttribute("center", "profile");
@@ -145,6 +194,34 @@ public class MainController {
 		
 		return "index";
 	}
+	
+	@RequestMapping("/clev")
+	public String clev(Model model, Admin admin, int lev, String adid, HttpSession session, Criteria criteria) {
+		try {
+			admin=aservice.get(adid);
+			admin.setAdlev(lev);
+			System.out.println(admin.toString());
+			aservice.modify(admin);
+			model.addAttribute("admin", admin);
+			model.addAttribute("center", "success/clev");
+		} catch (Exception e) {
+			model.addAttribute("center", "fail/error");
+			e.printStackTrace();
+		}
+		
+		return "index";
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 

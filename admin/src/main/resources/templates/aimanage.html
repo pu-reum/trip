@@ -92,7 +92,7 @@
 			<div class="col-lg-12 card-margin">
 				<div class="card search-form">
 					<div class="card-body p-0">
-						<form id="search-form" th:action="@{/member-inf-manage}">
+						<form id="search-form" th:action="@{/admin-inf-manage}">
 							<div class="row">
 								<div class="col-12">
 									<div class="row no-gutters">
@@ -130,76 +130,42 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">회원 ID</th>
-      <th scope="col">회원 이름</th>
-      <th scope="col">회원 닉네임</th>
-      <th scope="col">회원 전화번호</th>
-      <th scope="col">회원 email</th>
-      <th scope="col">등록일</th>
-      <th scope="col">회원 목숨</th>
+      <th scope="col">관리자 ID</th>
+      <th scope="col">관리자 이름</th>
+      <th scope="col">관리자 email</th>
+      <th scope="col">관리자 Lev</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <!-- <tr th:if="${#lists.size(list)} > 0" th:each="m:${list}"> -->
-    <tr th:each="m:${list}">
-      <td th:text="${m.custid}"></td>
-      <td th:text="${m.custname}"></td>
-      <td th:text="${m.custnick}"></td>
-      <td th:text="${m.custphone}"></td>
-      <td th:text="${m.custemail}"></td>
-      <td th:text="${#dates.format(m.rdate,'yyyy-MM-dd')}"></td>
-      <td><a th:href="@{/mremove(custid=${m.custid})}" onclick="return delcheck();">추방</a></td> 
-    </tr>
-    <!-- <tr th:unless="${#lists.size(list)} > 0">
-					<td colspan="4">조회된 결과가 없습니다.</td>
-	</tr> -->  
+    <tr th:each="a:${list}">
+      <td th:text="${a.adid}"></td>
+      <td th:text="${a.adname}"></td>
+      <td th:text="${a.ademail}"></td>
+      <td th:text="${a.adlev}"></td>
+      <td th:if="${a.adlev} < 3">
+      	<form method="get" th:action="@{/clev}">
+      		<select name="lev">
+      			<option value="0">0</option>
+      			<option value="1">1</option>
+      			<option value="2">2</option>
+      			<option value="3">3</option>
+      		</select>
+      		<input type="hidden" name="adid" th:value="${a.adid}">
+      		<input type="submit" id="clev" value="변경">
+      	</form>
+      </td>
+    </tr> 
   </tbody>
 </table>
 
-<!-- 페이징 -->
-     <!-- <div th:if="${pageMaker} != null">
-		<div class="row" th:object="${pageMaker}">
-        
-        	
-            <a class="page-link" th:if="*{criteria.pageNum>1}" th:href="@{/member-inf-manage(pageNum=*{criteria.pageNum-1})}">
-               		<code>PREV</code></a>
-               		
-                <a class="page-link" th:if="*{prev}" th:href="*{startPage-1}"><code>prev</code></a>
-                
-                <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
-                
-                	<a class="page-link" th:if="${pageMaker.criteria.getPageNum()==num}" th:text="${num}" style="color:black;"></a>
-                	
-                	<a class="page-link" th:unless="${pageMaker.criteria.getPageNum()==num}" th:href="@{/member-inf-manage(pageNum=${num})}">
-                		<code th:text="${num}"></code></a>	
-                		
-                </th:block>
-               
-               	
-               	<code th:text="*{criteria.pageNum}"></code>
-               	<a class="page-link" th:if="*{criteria.pageNum<end}" th:href="@{/member-inf-manage(pageNum=*{criteria.pageNum+1})}">
-               		<code>NEXT</code></a>
-             
-               <form action="/member-inf-manage" th:object="${criteria}" name="pageForm">
-               	<input type="hidden" name="pageNum" th:field="*{pageNum}">
-               	<input type="hidden" name="total" th:field="*{total}">
-               </form>
-            
-       </div>
-    	</div> -->
+
 
 
 
 <script>
-	function delcheck(){
-		var check=confirm("삭제하시겠습니까?");
-		if(check==true){
-			return true;
-		}else if(check==false){
-			return false;
-		}
-	};
-
+	
+	
 </script>
 
 

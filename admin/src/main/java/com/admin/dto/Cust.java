@@ -22,4 +22,5 @@ public class Cust {
 	private String custemail;
 	private Date rdate;
 	
+	
 }
