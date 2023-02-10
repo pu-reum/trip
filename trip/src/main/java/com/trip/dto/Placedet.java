@@ -61,6 +61,24 @@ public class Placedet {
 		this.pdlike = pdlike;
 		this.hit = hit;
 	}
+
+	public Placedet(int pdid, int cateid, String pdname, String pddesc, String pdaddr, String imgname1, String imgname2,
+			String pddate, String lat, String lng, int pdlike, int hit) {
+		super();
+		this.pdid = pdid;
+		this.cateid = cateid;
+		this.pdname = pdname;
+		this.pddesc = pddesc;
+		this.pdaddr = pdaddr;
+		this.imgname1 = imgname1;
+		this.imgname2 = imgname2;
+		this.pddate = pddate;
+		this.lat = lat;
+		this.lng = lng;
+		this.pdlike = pdlike;
+		this.hit = hit;
+	}
+	
 	
 	
 	

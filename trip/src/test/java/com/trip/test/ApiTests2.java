@@ -13,7 +13,7 @@ import com.trip.frame.ApiUtil2;
 import com.trip.service.PlacedetService;
 
 
-
+// 여행지 api
 @SpringBootTest
 class ApiTests2 {
 	

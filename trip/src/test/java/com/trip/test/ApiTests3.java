@@ -13,7 +13,7 @@ import com.trip.frame.ApiUtil3;
 import com.trip.service.PlacedetService;
 
 
-
+// 축제 api
 @SpringBootTest
 class ApiTests3 {
 	

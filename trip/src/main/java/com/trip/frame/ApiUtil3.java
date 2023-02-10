@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-
+// 축제 api (한국관광공사_국문 관광정보 서비스_GW)
 public class ApiUtil3 {
 	public static String getData(String pageNo) throws IOException{
 		StringBuilder urlBuilder = new StringBuilder(
