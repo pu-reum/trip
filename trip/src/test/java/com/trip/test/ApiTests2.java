@@ -42,8 +42,8 @@ class ApiTests2 {
 					String pddesc=(String)jo4.get("overview");
 					String pdaddr=(String)jo4.get("addr1");
 					String imgname1=(String)jo4.get("firstimage");
-					String lat=(String)jo4.get("mapx");
-					String lng=(String)jo4.get("mapy");
+					String lat=(String)jo4.get("mapy");
+					String lng=(String)jo4.get("mapx");
 					Placedet pd=new Placedet(0, 1, pdname, pddesc, pdaddr, imgname1, lat, lng, 0, 0);
 					service.insertPlace(pd);
 				};

@@ -130,17 +130,13 @@ th, td {
 	}
 
 	$(document).ready(function() {
-		//var lat=document.getElementById('lat');
-
-		//var lng=document.getElementById('lng');
-		//var lat=$('#lat').val();
-		/* var lng=$('#lng').val();
-
-		console.log(lat);
-		console.log(lng); */
 		center(lat, lng);
 
 		//heart();
+		
+		$(".btn_wish").click(function(){
+			alert("위시리스트에 추가하였습니다.");
+		});
 
 	});
 </script>
@@ -159,6 +155,10 @@ th, td {
 							<button type="button" class="btn" id="likebtn">
 								<img id="imgbtn" th:src="@{/img/love.png}" alt="empty">
 							</button> <input type="hidden" id="likecheck" th:value="${place.pdlike}">
+						</td>
+						<th scope="row"></th>
+						<td>
+							<button type="button" class="btn_wish">위시리스트</button>
 						</td>
 					</tr>
 
