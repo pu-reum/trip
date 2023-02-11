@@ -82,8 +82,9 @@
 	float: right;
 }
 
-#pagination {
-	margin: auto;
+.page-link {
+	width: 6%;
+	text-align: center;
 }
 </style>
 </head>
@@ -91,8 +92,7 @@
 	<br>
 	<div class="container">
 		<div class="text-center">
-			<h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">마이페이지</h6>
-			<h1>1:1 문의</h1>
+			<h1>1:1문의 관리</h1>
 		</div>
 		<div class="row">
 			<table class="table" id="listtable">
@@ -122,15 +122,10 @@
 			</table>
 		</div>
 
-		<div id="write">
-			<a th:href="@{/inquiry/inquirywrite}">글쓰기</a>
-		</div>
-
-
 		<!-- 페이징 -->
 		
 		
-		<div th:if="${pageMaker} != null">
+		<div id="pagination" th:if="${pageMaker} != null">
 		<div class="row" th:object="${pageMaker}">
         
         	

@@ -12,31 +12,30 @@
 
 <style>
 .container {
-	margin-top: 50px;
+	margin-top:50px;
 	max-width: 700px;
 }
-
-.inquiry_view {
-	margin-top: 20px;
-	border: 1px solid;
+.inquiry_view{
+	margin-top:20px;
+	border:1px solid;
 }
-
-td, th {
-	border-bottom: 1px solid;
-	border-right: 1px solid;
+td, th{
+	border-bottom:1px solid;
+	border-right:1px solid;
 	text-align: center;
 	padding: 5px;
 }
-
-button {
-	margin-top: 20px;
-	border: 0;
+button{
+	margin-top:20px;
+	border:0;
 }
-
-#upimg {
-	width: 60%;
+#upimg{
+	width: 100px;
+	height: 100px;
 }
 </style>
+
+
 </head>
 <body>
 	<div class="container">
@@ -68,36 +67,31 @@ button {
 						<th scope="row">제목</th>
 						<td colspan="3" th:text="${inquiry.icate}"></td>
 					</tr>
-
+					
 					<tr>
 						<th scope="row">문의내용</th>
 						<td colspan="5" class="view_text" th:text="${inquiry.icontent}"></td>
 					</tr>
-
+					
 					<tr th:if="${inquiry.file != null}">
 						<th scope="row">첨부파일</th>
-						<td colspan="5"><img id="upimg"
-							th:src="@{/img/upload/}+${inquiry.file}"/></td>
+						<td colspan="5"><img id="upimg" th:src="@{img/upload}+${inquiry.file}"/></td>
 					</tr>
 				</tbody>
 			</table>
 			<input type="hidden" name="inquiryid" th:value="${inquiry.inquiryid}">
-		</form>
+		
 
 		<span class="send_btn">
-			<button id="back">
-				<a th:href="@{/inquiry}">목록</a>
-			</button>
-		</span> <span class="send_btn">
-			<button id="edit">
-				<a th:href="@{/inquiry/inquiryedit(inquiryid=${inquiry.inquiryid})}">수정</a>
-			</button>
-		</span> <span class="send_btn">
-			<button id="delete">
-				<a
-					th:href="@{/inquiry/inquirydelete(inquiryid=${inquiry.inquiryid})}">삭제</a>
-			</button>
+			<button id="back"><a th:href="@{/inquiry}">목록</a></button>
 		</span>
+		<span class="send_btn">
+			<button id="delete"><a th:href="@{/inquiry/inquirydelete(inquiryid=${inquiry.inquiryid})}">삭제</a></button>
+		</span>
+		<span class="send_btn">
+			<button id="edit"><a th:href="@{/inquiry/inquiryeditok(inquiryid=${inquiry.inquiryid})}">답변완료</a></button>
+		</span>
+		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

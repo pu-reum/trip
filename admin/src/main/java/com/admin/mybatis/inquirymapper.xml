@@ -2,18 +2,14 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.trip.mapper.InquiryMapper">
-
-	<insert id="insertInquiry" parameterType="Inquiry">
-		INSERT INTO inquiry VALUES (null, #{custid}, #{icate}, #{icontent}, #{file}, "N", NOW())
-	</insert>
+<mapper namespace="com.admin.mapper.InquiryMapper">
 	
-	<delete id="deleteInquiry">
-		DELETE FROM inquiry WHERE inquiryid=#{inquiryid} AND custid=#{custid}
+	<delete id="deleteInquiry" parameterType="Integer">
+		DELETE FROM inquiry WHERE inquiryid=#{inquiryid}
 	</delete>
 	
-	<update id="updateInquiry">
-		UPDATE inquiry SET icate=#{icate}, icontent=#{icontent} WHERE inquiryid=#{inquiryid} AND custid=#{custid}
+	<update id="updateInquiry" parameterType="Inquiry">
+		UPDATE inquiry SET iprocess="Y" WHERE inquiryid=#{inquiryid}
 	</update>
 	
 	<select id="selectInquiry" parameterType="Integer" resultType="Inquiry">

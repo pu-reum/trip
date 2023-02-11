@@ -28,19 +28,28 @@ public class InquiryController {
 	@Autowired
 	InquiryService is;
 	
+	@Value("${admindir}")
+	String admindir;
+	
 	@Value("${custdir}")
 	String custdir;
 
 	// 목록
 	@RequestMapping("")
-	public String inquiry(Criteria criteria, Model model) throws Exception {
+	public String inquiry(Criteria criteria, Model model, HttpSession session) throws Exception {
 
 		// 글 목록
-		//Cust cust = (Cust) session.getAttribute("logincust");
-		List<Inquiry> list = is.selectInquiryList(criteria);
-		model.addAttribute("list", list);
-		model.addAttribute("pageMaker", new Page(is.getTotalData(), 5, criteria));
-		model.addAttribute("center", dir + "inquiry");
+		List<Inquiry> list = null;
+		Cust cust = (Cust) session.getAttribute("logincust");
+		if(cust != null) {
+			list = is.selectInquiryList(criteria);
+			model.addAttribute("list", list);
+			model.addAttribute("pageMaker", new Page(is.getTotalData(), 5, criteria));
+			model.addAttribute("center", dir + "inquiry");
+		}else {
+			model.addAttribute("center", dir + "access-limit");
+		}
+		
 		return "index";
 	}
 
@@ -57,18 +66,27 @@ public class InquiryController {
 	public String inquirywriteok(Inquiry inquiry, Model model, HttpSession session) throws Exception {
 		Cust cust = (Cust) session.getAttribute("logincust");
 		String file = inquiry.getImg().getOriginalFilename();
+		System.out.println(file+"-----");
 		
-		inquiry.setCustid(cust.getCustid());
-		inquiry.setFile(file);
-		try {
-			ImgUtil.saveFile(inquiry.getImg(), custdir);
+		if(file == null || file.equals("")) {
+			inquiry.setCustid(cust.getCustid());
 			is.insertInquiry(inquiry);
 			model.addAttribute("result", inquiry);
-		}catch(Exception e) {
-			e.printStackTrace();
-			return "redirect:/inquirywrite";
-		}
+		}else {
+			
+			try {
+				inquiry.setCustid(cust.getCustid());
+				inquiry.setFile(file);
+				ImgUtil.saveFile(inquiry.getImg(), admindir, custdir);
+				is.insertInquiry(inquiry);
+				model.addAttribute("result", inquiry);
+			}catch(Exception e) {
+				e.printStackTrace();
+				return "redirect:/inquirywrite";
+			}
 
+		}
+		
 		return "redirect:/inquiry";
 
 	}
@@ -87,18 +105,10 @@ public class InquiryController {
 	@PostMapping("/inquiryeditok")
 	public String inquiryeditok(Inquiry inquiry, Model model, HttpSession session) throws Exception {
 		Cust cust = (Cust) session.getAttribute("logincust");
-		String file = inquiry.getImg().getOriginalFilename();
-		
 		inquiry.setCustid(cust.getCustid());
-		inquiry.setFile(file);
-		try {
-			ImgUtil.saveFile(inquiry.getImg(), custdir);
-			is.updeateInquiry(inquiry);
-			model.addAttribute("result", inquiry);
-		}catch(Exception e) {
-			e.printStackTrace();
-			return "redirect:/inquiryedit";
-		}
+		System.out.println(inquiry);
+		is.updeateInquiry(inquiry);
+		model.addAttribute("result", inquiry);
 
 		return "redirect:/inquiry";
 
