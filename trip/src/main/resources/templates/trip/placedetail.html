@@ -3,76 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8fa691e3baf90a9350126414718f3265"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8fa691e3baf90a9350126414718f3265"></script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 </head>
 <style>
-body, ul, li{
-	list-style:none;
-	padding:0;
-	margin:0;
+body, ul, li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
-li{
-	float:left;
+
+li {
+	float: left;
 }
-th, td{
-	border-bottom:1px solid blue;
+
+th, td {
+	border-bottom: 1px solid blue;
 }
-#place_name{
+
+#place_name {
 	font-size: 30px;
-	padding:5px;
-	float:left;
+	padding: 5px;
+	float: left;
 }
-#map{
-	width:500px;
-	height:400px;
-	border:1px solid green;
+
+#map {
+	width: 500px;
+	height: 400px;
+	border: 1px solid green;
 }
-#img{
-	width:auto;
-	height:400px;
+
+#img {
+	width: auto;
+	height: 400px;
 	padding: 10px;
 }
-#place_desc{
-	float:right;
+
+#place_desc {
+	float: right;
 }
-#imgbtn{
-	width:40px;
-	height:40px;
+
+#imgbtn {
+	width: 40px;
+	height: 40px;
 }
 </style>
 <script>
-var map;
-/* var positions =[
-	{
-		title: "${place.pdname}",
-		latlng: new kakao.maps.LatLng("${place.lat}", "${place.lng}")
-	}
-]; */
-//var lat=document.getElementById('lat');
-//lat.innerHTML = lat.getLat();
-//var lng=document.getElementById('lng');
-//lng.innerHTML = lng.getLng();
-
-//지도 생성
-function center(lat, lng) {
+	var map;
+	/* var positions =[
+	 {
+	 title: "${place.pdname}",
+	 latlng: new kakao.maps.LatLng("${place.lat}", "${place.lng}")
+	 }
+	 ]; */
+	//var lat=document.getElementById('lat');
+	//lat.innerHTML = lat.getLat();
+	//var lng=document.getElementById('lng');
+	//lng.innerHTML = lng.getLng();
+	//지도 생성
+	function center(lat, lng) {
+		var lat = $('#lat').val();
+		var lng = $('#lng').val();
+		var flat = parseFloat(lat);
+		var flng = parseFloat(lng);
+		console.log(flat);
+		console.log(flng);
 		var mapContainer = document.getElementById('map');
 		var mapOptions = {
-			center : new kakao.maps.LatLng(33.450701, 126.570667),
+			center : new kakao.maps.LatLng(flat, flng),
 			level : 8
 		};
 		map = new kakao.maps.Map(mapContainer, mapOptions);
-		
+
 		//이미지 주소
-		var imageSrc ="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 		//이미지 크기
 		var imageSize = new kakao.maps.Size(24, 35);
 		//이미지 생성
 		var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-		
-		
+
 		/* for(var i=0; i<positions.length;i++){
 			//마커 생성
 			var marker = new kakao.maps.Marker({
@@ -92,37 +104,34 @@ function center(lat, lng) {
 			customOverlay.setMap(map);
 			map.setCenter(positions[i].latlng);
 		} */
-		var lat=$('#lat').val();
-		var lng=$('#lng').val();
-		console.log(lat);
-		console.log(lng);
-		var markerPostion = new kakao.maps.LatLng(lat, lng);
-		
+
+		var markerPostion = new kakao.maps.LatLng(flat, flng);
+
 		var marker = new kakao.maps.Marker({
-			position: markerPostion,
-			image:markerImage
-			});
-		
+			position : markerPostion,
+			image : markerImage
+		});
+
 		marker.setMap(map);
-		}
-	
-function heart(){
+	}
+
+	function heart() {
 		//좋아요가 있는지 확인한 값을 저장
 		var like = "${place.pdlike}"
-		if(like == 1){
+		if (like == 1) {
 			console.log(like);
-			$("#imgbtn").prop("th:src","@{/img/heart.png}");
+			$("#imgbtn").prop("th:src", "@{/img/heart.png}");
 			$(".imgbtn").prop('name', like)
-		}else{
+		} else {
 			console.log(like);
 			$("#imgbtn").prop("th:src", "@{/img/love.png}")
 			$(".imgbtn").prop('name', like)
-		} 
-}
+		}
+	}
 
-	$(document).ready(function(){
+	$(document).ready(function() {
 		//var lat=document.getElementById('lat');
-		
+
 		//var lng=document.getElementById('lng');
 		//var lat=$('#lat').val();
 		/* var lng=$('#lng').val();
@@ -130,55 +139,47 @@ function heart(){
 		console.log(lat);
 		console.log(lng); */
 		center(lat, lng);
-		
-	
+
 		//heart();
-		
-		
-		
+
 	});
-	
-	
- 
 </script>
 <body>
-<div class="container">
-	<form id="placeForm">
-		<table class="place_detail">
-			<tbody>
-				<tr id="place_name">
-				<th scope="row"></th>
-				<td th:text="${place.pdname}"></td>
-				<th scope="row"></th>
-				<td th:text="${place.hit}"></td>
-				<th scope="row"></th>
-				<td>
-					<button type="button" class="btn" id="likebtn"><img id="imgbtn" th:src="@{/img/love.png}" alt="empty" ></button>
-					<input type="hidden" id="likecheck" th:value="${place.pdlike}">
-				</td>
-				</tr>
-	
-				<tr id="place_desc">
-				<th scope="col"></th>
-				<td th:text="${place.pddesc}"></td>
-				<th scope="col"></th>
-				<td th:text="${place.pdaddr}"></td>
-				</tr>
-			</tbody>
-		</table>
-	 <input type="hidden" name="pdid" th:value="${place.pdid}">
-	</form>
-	<br>
-	
-	<img id="img" th:src="${place.imgname1}">
-	<br>
-	
-	<div id="map">
-		<input type="hidden" id="lat" name="lat" th:value="${place.lat}">
-		<input type="hidden" id="lng" name="lng" th:value="${place.lng}">
+	<div class="container">
+		<form id="placeForm">
+			<table class="place_detail">
+				<tbody>
+					<tr id="place_name">
+						<th scope="row"></th>
+						<td th:text="${place.pdname}"></td>
+						<th scope="row"></th>
+						<td th:text="${place.hit}"></td>
+						<th scope="row"></th>
+						<td>
+							<button type="button" class="btn" id="likebtn">
+								<img id="imgbtn" th:src="@{/img/love.png}" alt="empty">
+							</button> <input type="hidden" id="likecheck" th:value="${place.pdlike}">
+						</td>
+					</tr>
+
+					<tr id="place_desc">
+						<th scope="col"></th>
+						<td th:text="${place.pddesc}"></td>
+						<th scope="col"></th>
+						<td th:text="${place.pdaddr}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="hidden" name="pdid" th:value="${place.pdid}">
+		</form>
+		<br> <img id="img" th:src="${place.imgname1}"> <br>
+
+		<div id="map">
+			<input type="hidden" id="lat" name="lat" th:value="${place.lat}">
+			<input type="hidden" id="lng" name="lng" th:value="${place.lng}">
+		</div>
+
+
 	</div>
-	
-	
-</div>
 </body>
 </html>
