@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admin.mapper.CourseMapper">
+
+	<select id="insert" parameterType="Course">
+		INSERT INTO course VALUES (null, #{cname}, #{cdname1}, #{cdname2}, #{cdname3}, #{cdimg1}, #{cdimg2}, #{cdimg3}, #{cdcontent1}, #{cdcontent2}, #{cdcontent3}, NOW())
+	</select>
+	<select id="delete" parameterType="Integer">
+		DELETE FROM course WHERE cid=#{cid}
+	</select>
+	<select id="update" parameterType="Course">
+		UPDATE course SET cname=#{cname}, cdname1=#{cdname1}, cdname1=#{cdname2}, cdname1=#{cdname3}, cdimg1=#{cdimg1}, cdimg2=#{cdimg2}, cdimg3=#{cdimg3}, cdcontent1=#{cdcontent1}, cdcontent2=#{cdcontent2}, cdcontent3=#{cdcontent3} WHERE cid=#{cid}
+	</select>
+	<select id="select" parameterType="Integer" resultType="Course">
+		SELECT * FROM course WHERE cid=#{cid}
+	</select>
+	<select id="selectall" resultType="Course">
+		SELECT cid, cname, cdname1, cdname2, cdname3, cdimg1, cdimg2, cdimg3, cdcontent1, cdcontent2, cdcontent3, rdate FROM course
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

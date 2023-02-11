@@ -1,0 +1,41 @@
+<style>
+#write {
+	float: right;
+}
+</style>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">코스 이름</th>
+      <th scope="col">등록일</th>
+      <th scope="col">삭제</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="c:${list}">
+      <td ><a th:text="${c.cname}" th:href="@{/courseView(cid=${c.cid})}"></a></td>
+      <td th:text="${#dates.format(c.rdate,'yyyy-MM-dd')}"></td>
+      <td><a th:href="@{/courseRemove(cid=${c.cid})}" id="del" onclick="return delcheck();">삭제</a></td> 
+    </tr>
+  </tbody>
+</table>
+
+<div id="write">
+	<a th:href="@{/courseWrite}">글쓰기</a>
+</div>
+
+
+
+
+<script>
+	function delcheck(){
+		var check=confirm("삭제하시겠습니까?");
+		if(check==true){
+			return true;
+		}else if(check==false){
+			return false;
+		}
+	};
+
+</script>

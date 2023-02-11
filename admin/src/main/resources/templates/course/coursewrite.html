@@ -1,0 +1,130 @@
+<script>
+/* 	$('#btnSave').click(function(){
+		
+		$(form).submit();
+		
+	}); */
+
+	
+</script>
+
+<!-- jQuery -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<!-- Bootstrap CSS -->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+
+<div class="container">
+
+<article>
+
+		<div class="container" role="main">
+
+			<form name="form" id="form" role="form" method="post" th:action="@{/courseWriteimpl}">
+				
+				<div class="mb-3">
+
+					<h1>Course Name<h1>
+
+					<input type="text" class="form-control" name="cname" id="title" placeholder="코스 이름을 입력해 주세요">
+
+				</div>
+				
+				<h2>Course1</h2>
+			
+				<div class="mb-3">
+
+					<label for="title">제목</label>
+
+					<input type="text" class="form-control" name="cdname1" id="title" placeholder="제목을 입력해 주세요">
+
+				</div>
+
+				<div class="mb-3">
+
+					<label for="content">내용</label>
+
+					<textarea class="form-control" rows="5" name="cdcontent1" id="content" placeholder="내용을 입력해 주세요" ></textarea>
+
+				</div>
+
+				<div class="mb-3">
+
+					<label for="tag">이미지</label>
+
+					<input  type="file" class="form-control" name="img1" id="tag" value="이미지">
+
+				</div>
+				
+				<h2>Course2</h2>
+			
+				<div class="mb-3">
+
+					<label for="title">제목</label>
+
+					<input type="text" class="form-control" name="cdname2" id="title" placeholder="제목을 입력해 주세요">
+
+				</div>
+
+				<div class="mb-3">
+
+					<label for="content">내용</label>
+
+					<textarea class="form-control" rows="5" name="cdcontent2" id="content" placeholder="내용을 입력해 주세요" ></textarea>
+
+				</div>
+
+				<div class="mb-3">
+
+					<label for="tag">이미지</label>
+
+					<input  type="file" class="form-control" name="img2" id="tag" value="이미지">
+
+				</div>
+				
+				<h2>Course3</h2>
+			
+				<div class="mb-3">
+
+					<label for="title">제목</label>
+
+					<input type="text" class="form-control" name="cdname3" id="title" placeholder="제목을 입력해 주세요">
+
+				</div>
+
+				<div class="mb-3">
+
+					<label for="content">내용</label>
+
+					<textarea class="form-control" rows="5" name="cdcontent3" id="content" placeholder="내용을 입력해 주세요" ></textarea>
+
+				</div>
+
+				<div class="mb-3">
+
+					<label for="tag">이미지</label>
+
+					<input  type="file" class="form-control" name="img3" id="tag" value="이미지">
+
+				</div>
+				
+				<div >
+
+					<button type="submit" class="btn btn-sm btn-primary" id="btnSave">저장</button>
+
+				</div>
+
+			</form>
+
+			
+
+		</div>
+
+</article>
+
+</div>
+
