@@ -44,7 +44,7 @@ class ApiTests {
 				String pddate=(String)jo2.get("USAGE_DAY_WEEK_AND_TIME");
 				Placedet pd=new Placedet(0, 3, pdname, pddesc, pdaddr, imgname1, imgname2, pddate, lat, lng, 0, 0);
 				//System.out.println(pd.toString());
-				service.register(pd);
+				service.insertPlace(pd);
 			}
 			System.out.println("ok");
 		} catch (Exception e) {

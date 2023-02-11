@@ -94,7 +94,6 @@
 <body>
 	<br>
 	<div class="container">
-		<h1>게시판 목록</h1>
 		
 		<!-- 검색창 -->
 		<div class="row">
@@ -107,7 +106,7 @@
 									<div class="row no-gutters">
 										<div class="col-lg-3 col-md-3 col-sm-12 p-0">
 											<label for="searchtype" hidden>유형</label> 
-											<select class="form-control" id="searchtype" name="searchtype">
+											<select class="form-control" id="searchKey" name="searchKey">
 												<option value="title">제목</option>
 												<option value="content">본문</option>
 												<option value="custid">작성자</option>
@@ -115,7 +114,7 @@
 										</div>
 										<div class="col-lg-8 col-md-6 col-sm-12 p-0">
 											<label for="searchvalue" hidden>검색어</label> 
-											<input type="text" placeholder="검색어를 입력하세요" class="form-control" id="search" name="search">
+											<input type="text" placeholder="검색어를 입력하세요" class="form-control" id="searchWord" name="searchWord">
 										</div>
 										<div class="col-lg-1 col-md-3 col-sm-12 p-0">
 											<button type="submit" class="btn btn-base">
@@ -169,20 +168,35 @@
 				</div>
 			
 		<!-- 페이징 -->
-		<div class="row">
-        <nav id="pagination" aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">prev</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">next</a></li>
-            </ul>
-        </nav>
-    	</div>
-		
+        <div th:if="${pageMaker} != null">
+		<div class="row" th:object="${pageMaker}">
+        
+        	
+           <a class="page-link" th:if="*{criteria.pageNum>1}" th:href="@{/board(pageNum=*{criteria.pageNum-1})}">
+               		<code>PREV</code></a>
+               		
+                <a class="page-link" th:if="*{prev}" th:href="*{startPage-1}"><code>prev</code></a>
+                
+                <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                
+                	<a class="page-link" th:if="${pageMaker.criteria.getPageNum()==num}" th:text="${num}" style="color:black;"></a>
+                	
+                	<a class="page-link" th:unless="${pageMaker.criteria.getPageNum()==num}" th:href="@{/board(pageNum=${num})}">
+                		<code th:text="${num}"></code></a>	
+                		
+                </th:block>
+               
+               	
+               	<!-- <code th:text="*{criteria.pageNum}"></code> -->
+               	<a class="page-link" th:if="*{criteria.pageNum<end}" th:href="@{/board(pageNum=*{criteria.pageNum+1})}">
+               		<code>NEXT</code></a>
+             
+               <form action="/board" th:object="${criteria}" name="pageForm">
+               	<input type="hidden" name="pageNum" th:field="*{pageNum}">
+               	<input type="hidden" name="total" th:field="*{total}">
+               </form>
+            </div>
+		</div>
 	</div>
 </body>
 </html>

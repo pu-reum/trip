@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trip.dto.Board;
+import com.trip.dto.Criteria;
 import com.trip.mapper.BoardMapper;
 
 @Service
@@ -39,10 +40,14 @@ public class BoardService{
 	}
 
 	//글 목록
-	public List<Board> selectBoardList(Board board) throws Exception {
+	public List<Board> selectBoardList(Criteria criteria) throws Exception {
 		//String catenum=bmp.categoryEnum(board);
-		return bmp.selectBoardList();
+		
+		return bmp.selectBoardList(criteria);
 	}
-
-
+	//페이지 네이션
+	public int getTotalData() {
+		return bmp.getTotalData();
+	}
+	
 }

@@ -32,8 +32,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		<if test="searchWord!=null">
 			where ${searchKey} like '%${searchWord}%'
 		</if>
-
 	</select>
+	
 	<select id="selectNotice" parameterType="Integer" resultType="Notice">
 		SELECT  noid, nottitle, notice, file,hit, rdate FROM notice WHERE noid=#{noid}
 	</select>

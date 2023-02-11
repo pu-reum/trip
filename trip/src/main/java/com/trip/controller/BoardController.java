@@ -3,7 +3,6 @@ package com.trip.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,9 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 import com.trip.dto.Board;
-import com.trip.dto.Category;
+import com.trip.dto.Criteria;
 import com.trip.dto.Cust;
+import com.trip.dto.Page;
+import com.trip.dto.ReplyBoard;
 import com.trip.service.BoardService;
+import com.trip.service.ReplyBoardService;
 
 @Controller
 @RequestMapping("/board")
@@ -36,14 +37,18 @@ public class BoardController {
 	@Autowired
 	BoardService bs;
 	
+	@Autowired
+	ReplyBoardService rbs;
+	
 	//목록
 	@RequestMapping("")
-	public String board(Model model, Board board) throws Exception {
+	public String board(Model model, Criteria criteria) throws Exception {
 		
 		//글 목록
-		List <Board> list = bs.selectBoardList(board);
+		List <Board> list = bs.selectBoardList(criteria);
 		model.addAttribute("list", list);
-		
+		System.out.println(list);
+		model.addAttribute("pageMaker", new Page(bs.getTotalData(), 5, criteria));
 		//bs.categoryEnum(board);
 		model.addAttribute("center", dir+"board");
 		return "index";
@@ -70,6 +75,12 @@ public class BoardController {
 		
 		Board board=bs.selectBoard(postid);
 		model.addAttribute("board", board);
+		
+		//댓글 조회
+		List<ReplyBoard> reply = rbs.selectCommentList(postid);
+		model.addAttribute("reply", reply);
+		
+		System.out.println(reply);
 		model.addAttribute("center", dir+"boardview");
 		return "index";
 	}
@@ -112,11 +123,20 @@ public class BoardController {
 	
 	@PostMapping(value="/uploadSummernoteImageFile", produces="application/json")
 	@ResponseBody
-	public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
-		
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+		System.out.println("122");
 		JsonObject jsonObject = new JsonObject();
 		
-		String fileRoot ="C:\\summernote_image\\"; //저장될 외부 파일 경로
+		String fileRoot ="C:\\summernoteImage\\"; //저장될 외부 파일 경로
+		
+		/*
+		 * 내부
+		 * String contextRoot =
+		 * request.getSession().getServletContext().getRealPath("/"); String
+		 * fileRoot=contextRoot+"resources/fileupload/";
+		 */
+		//String contextRoot = 
+		
 		String originalFileName=multipartFile.getOriginalFilename(); //오리지널 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); //파일 확장자
 		
@@ -127,15 +147,15 @@ public class BoardController {
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); //파일저장
-			jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
+			jsonObject.addProperty("url", "C:\\summernote_image\\"+savedFileName);
 			jsonObject.addProperty("responseCode", "success");
 		}catch(IOException e) {
 			FileUtils.deleteQuietly(targetFile); //저장된 파일 삭제
 			jsonObject.addProperty("responseCode","error");
 			e.printStackTrace();
 		}
-		
-		return jsonObject;
+		String result = jsonObject.toString();
+		return result;
 	}
 	
 }

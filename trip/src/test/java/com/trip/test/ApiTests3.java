@@ -40,11 +40,11 @@ class ApiTests3 {
 				String pddesc="tel : "+(String)jo4.get("tel");
 				String pdaddr=(String)jo4.get("addr1");
 				String imgname1=(String)jo4.get("firstimage");
-				String lat=(String)jo4.get("mapx");
-				String lng=(String)jo4.get("mapy");
+				String lat=(String)jo4.get("mapy");
+				String lng=(String)jo4.get("mapx");
 				String pddate=(String)jo4.get("eventstartdate")+"~"+(String)jo4.get("eventenddate");
 				Placedet pd=new Placedet(0, 2, pdname, pddesc, pdaddr, imgname1, pddate, lat, lng, 0, 0);
-				service.register(pd);
+				service.insertPlace(pd);
 				
 			}
 			System.out.println("ok");

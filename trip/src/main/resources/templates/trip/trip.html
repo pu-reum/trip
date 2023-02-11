@@ -1,129 +1,181 @@
-<!DOCTYPE HTML>
-
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
- 	<!--<link rel="stylesheet" href="/style.css">-->
-	<link rel="stylesheet" href="/css/tripcss/trip.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" th:href="@{/css/tripcss/trip.css}">
+<style>
+.search-form {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.search-form input {
+  height: 100%;
+  background: transparent;
+  border: 0;
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  height: 100%;
+  font-size: 1rem;
+}
+
+.search-form select {
+  background: transparent;
+  border: 0;
+  padding: 1rem;
+  height: 100%;
+  font-size: 1rem;
+}
+
+.search-form select:focus {
+  border: 0;
+}
+
+.search-form button {
+  height: 100%;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.search-form button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.card-margin {
+  margin-bottom: 1.875rem;
+}
+
+@media (min-width: 992px) {
+  .col-lg-2 {
+    flex: 0 0 16.66667%;
+    max-width: 16.66667%;
+  }
+}
+
+.card {
+  border: 0;
+  box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+  -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #ffffff;
+  background-clip: border-box;
+  border: 1px solid #e6e4e9;
+  border-radius: 8px;
+}
+</style>
 </head>
-<div class="container-fluid py-5">
-        <div class="container pt-5 pb-3">
-            <div class="text-center mb-3 pb-3">
-          
-  
-<ul class="places">
 
-	<li><a href="#" style= "color : rgb(255, 255, 255)" class="home">서울</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)" class="home">인천</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)">대전</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)">대구</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)">부산</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)">제주</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)">충북</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)">충남</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)">울산</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)">전북</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)">전남</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)">경북</a></li>
-	<li><a href="#" style= "color : rgb(255, 255, 255)">경남</a></li>
-</ul>
-</div>
- 
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;"></h6>
+<body>
+<div class="container">
+
+		<!-- 검색창 -->
+		<div class="row">
+			<div class="col-lg-12 card-margin">
+				<div class="card search-form">
+					<div class="card-body p-0">
+						<form id="search-form">
+							<div class="row">
+								<div class="col-12">
+									<div class="row no-gutters">
+										<div class="col-lg-3 col-md-3 col-sm-12 p-0">
+											<label for="searchtype" hidden>유형</label> 
+											<select class="form-control" id="searchKey" name="searchKey">
+												<option value="pdname">관광지</option>
+												<option value="pdaddr">주소</option>
+											</select>
+										</div>
+										<div class="col-lg-8 col-md-6 col-sm-12 p-0">
+											<label for="searchvalue" hidden>검색어</label> 
+											<input type="text" placeholder="검색어를 입력하세요" class="form-control" id="searchWord" name="searchWord">
+										</div>
+										<div class="col-lg-1 col-md-3 col-sm-12 p-0">
+											<button type="submit" class="btn btn-base">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24"
+													height="24" viewBox="0 0 24 24" fill="none"
+													stroke="currentColor" stroke-width="2"
+													stroke-linecap="round" stroke-linejoin="round"
+													class="feather feather-search">
+														<circle cx="11" cy="11" r="8"></circle>
+														<line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+        <table class="table" id="listtable">
+            <thead>
+            
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="destination-item position-relative overflow-hidden mb-2">
+                        <img class="img-fluid" th:src="${list.imgname1}" alt="">
+                        <input type="hidden" name="lat" th:text="${list.lat}">
+                        <input type="hidden"  name="lng" th:text="${list.lng}">
+                        <a class="destination-overlay text-white text-decoration-none" th:text="${list.pdname}" th:href="@{/trip/placedetail(pdid=${list.pdid})}"></a>
+                    </div>
+                </div>
+            </tr>
+            <tr th:unless="${#lists.size(list)} > 0">
+					<td colspan="4">조회된 결과가 없습니다.</td>
+			</tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 페이징 -->
+        <div th:if="${pageMaker} != null">
+		<div class="row" th:object="${pageMaker}">
+        
+        	
+           <a class="page-link" th:if="*{criteria.pageNum>1}" th:href="@{/trip/trip(pageNum=*{criteria.pageNum-1})}">
+               		<code>PREV</code></a>
+               		
+                <a class="page-link" th:if="*{prev}" th:href="*{startPage-1}"><code>prev</code></a>
                 
+                <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                
+                	<a class="page-link" th:if="${pageMaker.criteria.getPageNum()==num}" th:text="${num}" style="color:black;"></a>
+                	
+                	<a class="page-link" th:unless="${pageMaker.criteria.getPageNum()==num}" th:href="@{/trip/trip(pageNum=${num})}">
+                		<code th:text="${num}"></code></a>	
+                		
+                </th:block>
                
-                
-       
-       <div class="container-fluid py-5">
-        <div class="container pt-5 pb-3">
-            <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;"></h6>
-                <h1>여행 소개</h1>
+               	
+               	<!-- <code th:text="*{criteria.pageNum}"></code> -->
+               	<a class="page-link" th:if="*{criteria.pageNum<end}" th:href="@{/trip/trip(pageNum=*{criteria.pageNum+1})}">
+               		<code>NEXT</code></a>
+             
+               <form action="/trip/trip" th:object="${criteria}" name="pageForm">
+               	<input type="hidden" name="pageNum" th:field="*{pageNum}">
+               	<input type="hidden" name="total" th:field="*{total}">
+               </form>
             </div>
-            
-            <div>
-          	 	<ul class="sub-title">	
-					<li><a href="#" style= "color : black">여행지</a></li>
-					<li><a href="#" style= "color : black">맛집</a></li>
-					<li><a href="#" style= "color : black">축제</a></li>
-				</ul>     
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="destination-item position-relative overflow-hidden mb-2">
-                        <img class="img-fluid" src="http://rgo4.com/files/attach/images/2676751/909/558/019/093271cf31ad9cabdf4216e7bbcc7b7b.jpg" alt="">
-                        <a class="destination-overlay text-white text-decoration-none" href="">
-                            <h5 class="text-white">데이터를 입력하세요.</h5>
-                            <span>상세위치 입력</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="destination-item position-relative overflow-hidden mb-2">
-                        <img class="img-fluid" src="#" alt="">
-                        <a class="destination-overlay text-white text-decoration-none" href="">
-                            <h5 class="text-white">데이터를 입력하세요.</h5>
-                            <span>상세위치 입력</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="destination-item position-relative overflow-hidden mb-2">
-                        <img class="img-fluid" src="#" alt="">
-                        <a class="destination-overlay text-white text-decoration-none" href="">
-                             <h5 class="text-white">데이터를 입력하세요.</h5>
-                            <span>상세위치 입력</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="destination-item position-relative overflow-hidden mb-2">
-                        <img class="img-fluid" src="#" alt="">
-                        <a class="destination-overlay text-white text-decoration-none" href="">
-                            <h5 class="text-white">데이터를 입력하세요.</h5>
-                            <span>상세위치 입력</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="destination-item position-relative overflow-hidden mb-2">
-                        <img class="img-fluid" src="#" alt="">
-                        <a class="destination-overlay text-white text-decoration-none" href="">
-                             <h5 class="text-white">데이터를 입력하세요.</h5>
-                            <span>상세위치 입력</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="destination-item position-relative overflow-hidden mb-2">
-                        <img class="img-fluid" src="#" alt="">
-                        <a class="destination-overlay text-white text-decoration-none" href="">
-                            <h5 class="text-white">데이터를 입력하세요.</h5>
-                            <span>상세위치 입력</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-       
-       
-       
-                
-  <!— 페이지 처리 —>
-<div class="row">
-        <nav id="pagination" aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#"><</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">></a></li>
-            </ul>
-        </nav>
-    	</div>
+		</div>
+	</div>
 
-     </div>
-        </div>
-    </div>
+</div>
+</body>
+</html>

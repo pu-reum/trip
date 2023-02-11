@@ -45,7 +45,7 @@ class ApiTests2 {
 					String lat=(String)jo4.get("mapx");
 					String lng=(String)jo4.get("mapy");
 					Placedet pd=new Placedet(0, 1, pdname, pddesc, pdaddr, imgname1, lat, lng, 0, 0);
-					service.register(pd);
+					service.insertPlace(pd);
 				};
 			}
 			System.out.println("ok");

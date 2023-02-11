@@ -3,13 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+<!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>  -->
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css"
 	rel="stylesheet">
 <script
-	src="http://cdn.jsdelivr.net/npm/summernote@0.8.9/dist/summernote-lite.js" defer></script>
+	src="http://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js" defer></script>
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js" defer></script>
 
@@ -97,8 +100,8 @@
 		
 		//제목과 본문 입력 안 했을 떄
 		$("#regi").click(function(){
-			var title=$("#title").val().trim();
-			var content=$("#content").val().trim();
+			var title=$("#title").val();
+			var content=$("#content").val();
 			if(content == '' && title==''){
 				alert("제목과 내용을 입력하세요");
 				return false;
@@ -112,16 +115,33 @@
 		});
 		
 		$('#summernote').summernote({
-			placeholder : '여행 기록을 남겨 보세요',
+			placeholder : '여행 기록을 남겨 보세요. 최대 2048자까지 적을 수 있습니다.',
 			tabsize : 2,
 			height : 300,
 			focus: true,
 			lang: "ko-KR",
-			callbacks: { //이미지 첨부
-				onImageUpload: function(files){
-					uploadSummernoteImageFile(files[0],this);
-				},
-				onPaste: function(e){
+			codeviewFilter: true,
+			codeviewIframeFilter: true,
+			toolbar: [
+		         ['fontname',['fontname']],
+		         ['fontsize',['fontsize']],
+		         ['style',['bold', 'italic', 'underline','strikethrough', 'clear']],
+		         ['color', ['forecolor','color']],
+		         ['table', ['table']],
+		         ['para', ['ul', 'ol', 'paragraph']],
+		         ['height', ['height']],
+		         ['insert',['picture','link','video']],
+		         ['view', ['codeview','fullscreen', 'help']]
+		        ],
+		        fontNmaes: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+		        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+			 callbacks: { //이미지 첨부
+				onImageUpload: function(files,editor,welEditable){
+					for(var i=files.length-1;i>=0;i--){
+						uploadSummernoteImageFile(files[i],this);
+					}
+				}, 
+				 /* onPaste: function(e){
 					var clipboardData =e.originalEvent.clipboardData;
 					if(clipboardData && clipboardData.items && clipboardData.item.length){
 						var item=clipboardData.items[0];
@@ -129,24 +149,29 @@
 							e.preventDefault();
 						}
 					}
-				}
+				} */ 
 			}
 		});
+		//$('#summernote').summernote(setting);
+    	
 		/*이미지 업로드*/
-		function uploadSummernoteImageFile(file, editor){
-			data=new FormData();
+		 function uploadSummernoteImageFile(file, el){
+			var data=new FormData();
 			data.append("file",file);
+			console.log(file);
 			$.ajax({
 				data:data,
 				type:"POST",
 				url:"uploadSummernoteImageFile",
 				contentType:false,
+				enctype : 'multipart/form-data',
 				processData:false,
 				success:function(data){
-					$(editor).summernote('insertImage', data.url);
+					console.log("img : "+data.url);
+					$(el).summernote('editor.insertImage', data.url);
 				}
 			});
-		}
+		} 
 	
 		
 	});
@@ -169,7 +194,7 @@
 			<ul>
 				<li><input type="text" name="catename" id="catename" size="50" placeholder="여행지,맛집,축제,기타"></li><br>			
 				<li><input type="text" name="title" id="title" size="100" placeholder="제목"/></li><br>
-				<textarea id="summernote" name="content"></textarea><br>
+				<li><textarea type="text" id="summernote" name="content" ></textarea></li><br>
 				<li><input type="submit" id="regi" value="게시물 등록"></li>
 			</ul>
 			

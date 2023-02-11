@@ -23,7 +23,7 @@ public class NoticeService {
 	public Notice selectNotice(int noid) throws Exception {
 		nmp.updateHitCount(noid);
 		Notice notice = nmp.selectNotice(noid);
-		return nmp.selectNotice(noid);
+		return notice;
 	}
 	//페이지네이션
 	public int getTotalData() {

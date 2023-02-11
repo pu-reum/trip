@@ -41,7 +41,7 @@ public class Board {
 		this.postid = postid;
 		this.custid = custid;
 		this.content = content;
-		this.highpostid = highpostid;
+		this.highpostid = highpostid; //원글번호
 		this.rdate = rdate;
 	}
 	
