@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.admin.dto.Admin;
 import com.admin.dto.Criteria;
+import com.admin.dto.Cust;
 import com.admin.frame.MyMapper;
 
 @Repository

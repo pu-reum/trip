@@ -5,12 +5,15 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.admin.dto.Criteria;
+import com.admin.dto.Cust;
 import com.admin.dto.Inquiry;
 import com.admin.dto.Page;
 import com.admin.service.InquiryService;
