@@ -69,6 +69,13 @@ public class CustService implements MyService<String, Cust>{
 		return mapper.getTotalData(criteria);
 	}
 	
+	public int countCust() throws Exception{
+		return mapper.countCust();
+	}
+	
+	public int todayCountCust() throws Exception{
+		return mapper.todayCountCust();
+	}
 	
 	
 }

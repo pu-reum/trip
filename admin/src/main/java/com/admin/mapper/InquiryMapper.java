@@ -22,4 +22,6 @@ public interface InquiryMapper{
 	void deleteInquiry(int inquiryid) throws Exception;
 	//페이지
 	int getTotalData();
+	
+	List<Inquiry> iList() throws Exception;
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.admin.dto.Admin;
@@ -74,24 +75,24 @@ public class CourseController {
 		return "index";
 	}
 	
-	@RequestMapping("/courseWriteimpl")
+	@PostMapping("/courseWriteimpl")
 	public String courseWriteimpl(Model model, HttpSession session, Course course) {
 		String cdimg1 = course.getImg1().getOriginalFilename();
 		String cdimg2 = course.getImg2().getOriginalFilename();
 		String cdimg3 = course.getImg3().getOriginalFilename();
+		System.out.println(cdimg1);
 		
 		course.setCdimg1(cdimg1);
 		course.setCdimg2(cdimg2);
 		course.setCdimg3(cdimg3);
-		System.out.println("1");
 		
 		try {
 			ImgUtil.saveFile(course.getImg1(), admindir);
 			ImgUtil.saveFile(course.getImg2(), admindir);
 			ImgUtil.saveFile(course.getImg3(), admindir);
-			System.out.println("2");
+			
 			service.register(course);
-			System.out.println("3");
+	
 			model.addAttribute("center", "coursewriteOk");
 		} catch (Exception e) {
 			e.printStackTrace();

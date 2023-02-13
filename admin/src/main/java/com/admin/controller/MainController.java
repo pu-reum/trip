@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.admin.dto.Admin;
 import com.admin.dto.Criteria;
 import com.admin.dto.Cust;
+import com.admin.dto.Inquiry;
 import com.admin.dto.Page;
+import com.admin.dto.Placedet;
 import com.admin.service.AdminService;
 import com.admin.service.CustService;
+import com.admin.service.InquiryService;
+import com.admin.service.PlacedetService;
 
 @Controller
 public class MainController {
@@ -25,16 +29,56 @@ public class MainController {
 	@Autowired
 	CustService cservice;
 	
+	@Autowired
+	PlacedetService pservice;
+	
+	@Autowired
+	InquiryService iservice;
+	
 	@RequestMapping("/")
-	public String index() {
+	public String index(Model model) {
+		int mc;
+		int tmc;
+		List<Admin> list=null;
+		List<Placedet> plist=null;
+		List<Inquiry> ilist=null;
+		
+		try {
+			// 회원수 정보
+			mc=cservice.countCust();
+			tmc=cservice.todayCountCust();
+			model.addAttribute("mc", mc);
+			model.addAttribute("tmc", tmc);
+			
+			// 관리자 목록
+			list=aservice.get();
+			model.addAttribute("list", list);
+			
+			// 인기 게시판
+			
+			
+			// 1:1문의(new)
+			ilist=iservice.iList();
+			model.addAttribute("ilist", ilist);
+			
+			// 인기 상품
+			plist=pservice.sList();
+			model.addAttribute("plist", plist);
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		return "index";
 	}
 	
-	@RequestMapping("/index")
-	public String main() {
-		return "index";
-	}
+	
+	
+	/*
+	 * @RequestMapping("/index") public String main() { return "index"; }
+	 */
 	
 	@RequestMapping("/pages-register")
 	public String register() {

@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	
 	</select>
 	
-	<select id="getTotalData" resultType="int">
+	<select id="getTotalData" resultType="Integer">
 		SELECT COUNT(custid) FROM cust
 		<if test="searchWord!=null and searchWord!=''">
 			<if test="searchKey=='id'">
@@ -52,6 +52,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 				WHERE custname like CONCAT('%', #{searchWord}, '%')
 			</if>
 		</if>
+	</select>
+	
+	<select id="countCust" resultType="Integer">
+		SELECT COUNT(*) FROM cust
+	</select>
+	<select id="todayCountCust" resultType="Integer">
+		SELECT COUNT(*) FROM cust WHERE DATE_FORMAT(rdate,'%Y-%m-%d')=DATE_FORMAT(now(), '%Y-%m-%d')
 	</select>
 	
 </mapper>

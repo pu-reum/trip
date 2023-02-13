@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admin.mapper.PlacedetMapper">
+
+	<select id="insertPlace" parameterType="Placedet">
+		INSERT INTO placedet 
+		VALUES (NULL, #{cateid}, #{pdname}, #{pddesc}, #{pdaddr}, #{imgname1}, #{imgname2}, #{imgname3}, #{imgname4}, #{imgname5}, #{pddate}, #{lat}, #{lng}, #{pdlike}, #{hit}, NOW())
+	</select>
+	<select id="deletePlace" parameterType="Integer">
+		DELETE FROM cust WHERE custid=#{custid}
+	</select>
+	<!-- <select id="update" parameterType="Placedet">
+		UPDATE placedet SET custpwd=#{custpwd}, custname=#{custname}, custnick=#{custnick}, custphone=#{custphone}, custemail=#{custemail} WHERE pdid=#{pdid}
+	</select> -->
+	<select id="selectPlace" parameterType="Integer" resultType="Placedet">
+		SELECT * FROM placedet WHERE pdid=#{pdid}
+	</select>
+	
+	<select id="selectPlaceList" resultType="Placedet">
+		<![CDATA[
+		SELECT x.*
+		FROM (
+			SELECT @rownum:=@rownum+1 as rn, a.*
+			FROM(
+				SELECT *
+				FROM placedet
+			]]>
+				<if test="searchWord != null">
+						where ${searchKey} like '%${searchWord}%'
+					</if>
+					<![CDATA[
+					order by pdid DESC) a, (SELECT @rownum:=0)R
+				WHERE @rownum <= #{pageNum}*#{total}) x
+			WHERE x.rn > (#{pageNum}-1)*#{total}
+			]]>
+	</select>
+	
+	<select id="getTotalData" resultType="int">
+		SELECT COUNT(pdid) FROM placedet
+		<if test="searchWord!=null">
+			WHERE ${searchKey} LIKE '%${searchWord}%'
+		</if>
+	</select>
+	
+	<update id="updateHitCount" parameterType="int">
+		UPDATE placedet SET hit=hit+1 WHERE pdid=${pdid}
+	</update>
+	
+	<select id="sList" resultType="Placedet">
+		SELECT * FROM placedet ORDER BY pdlike desc LIMIT 5
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

@@ -33,4 +33,20 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="getTotalData" resultType="int">
 		SELECT COUNT(inquiryid) FROM inquiry
 	</select>
+	
+	<select id="iList" resultType="Inquiry">
+		SELECT * FROM inquiry WHERE iprocess="N"
+	</select> 
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+

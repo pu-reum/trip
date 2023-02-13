@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM admin WHERE adid=#{adid}
 	</select>
 	<select id="selectall" resultType="Admin">
-		SELECT * FROM admin
+		SELECT * FROM admin ORDER BY adlev DESC
 	</select>
 	<select id="login" parameterType="String" resultType="Admin">
 		SELECT * FROM admin WHERE adid=#{param1} AND adpwd=#{param2}

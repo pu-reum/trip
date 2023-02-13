@@ -40,5 +40,10 @@ public class InquiryService{
 	public int getTotalData() {
 		return im.getTotalData();
 	}
+	
+	// 글 목록(new)
+	public List<Inquiry> iList() throws Exception{
+		return im.iList();
+	}
 
 }

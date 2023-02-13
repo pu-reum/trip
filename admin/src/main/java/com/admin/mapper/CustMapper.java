@@ -19,4 +19,7 @@ public interface CustMapper extends MyMapper<String, Cust> {
 	
 	public List<Cust> getCustList(Criteria criteria) throws Exception;
 	public int getTotalData(Criteria criteria) throws Exception;
+	
+	public int countCust() throws Exception;
+	public int todayCountCust() throws Exception;
 }
