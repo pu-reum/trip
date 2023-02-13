@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admin.mapper.ReplyBoardMapper">
+
+	<insert id="insertComment" parameterType="ReplyBoard">
+		INSERT INTO replyBoard VALUES(null, #{custid}, #{coment}, ${postid}, NOW())
+	</insert>
+	
+	<select id="selectCommentList" resultType="ReplyBoard">
+		SELECT * FROM replyBoard WHERE postid=#{postid}
+	</select>
+	
+	<update id="updateComment">
+		UPDATE replyBoard coment=#{coment} WHERE replyno=#{replyno} AND postid=#{postid}
+	</update>
+	
+	<delete id="deleteComment">
+		DELETE FROM replyBoard WHERE replyno=#{replyno} AND postid=#{postid}
+	</delete>
+</mapper>

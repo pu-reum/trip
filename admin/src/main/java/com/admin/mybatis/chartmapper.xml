@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admin.mapper.ChartMapper">
+<!-- 총 회원 수 -->
+<select id="getTotalMember">
+	SELECT count(*) from cust
+</select>
+<!-- 이번 주 가입 회원 수 -->
+<select id="getWeekMember"></select>
+	
+<!-- 오늘 가입 회원 수 -->
+<select id="getTodayMember">
+	SELECT
+	(SELECT count(*)
+	FROM cust
+	WHERE rdate >= to_char(trunc(now()), 'yyyy/mm/dd'))
+	FROM 
+</select>
+</mapper>

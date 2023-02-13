@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.admin.dto.Admin;
 import com.admin.dto.Criteria;
-import com.admin.dto.Cust;
 import com.admin.frame.MyService;
 import com.admin.mapper.AdminMapper;
 
