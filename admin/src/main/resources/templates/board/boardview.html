@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+.container{
+	margin-top:50px;
+	max-width: 700px;
+}
+.board_view{
+	margin-top:20px;
+	border:1px solid;
+}
+td, th{
+	border-bottom:1px solid;
+	border-right:1px solid;
+	text-align: center;
+	padding: 5px;
+}
+button{
+	margin-top:20px;
+	border:0;
+}
+#clist{
+	padding:10px;
+}
+</style>
+
+<script>
+/* 	$(document).ready(function(){
+		getCommentList();
+	});
+	
+	function getCommentList(){
+		var postid = $('input[name=postid]').val();
+		$.ajax({
+			type:'GET',
+			url:'[[@{/getCommentList}]]',
+			data:{postid},
+			success: function(result){
+				console.log(result);
+				for(var i=0;i<result.lengh;i++){
+					var str="<div class=\"commentList\">"
+					str += result[i].coment+"</div></hr>"
+					$("#commentList").append(str);
+				}
+			},
+			error:function(result){
+			},
+			complete:function(){
+				
+			}
+		});
+	} */
+</script>
+</head>
+<body>
+<div class="container">
+
+		<form id="form" method="post">
+		
+	    	<table class="board_view">
+				<colgroup>
+					<col width="15%"/>
+					<col width="35%"/>
+					<col width="15%"/>
+					<col width="35%"/>
+				</colgroup>
+				
+				<tbody>
+					<tr>
+						<th scope="row">글 번호</th>
+						<td th:text="${board.postid}"></td>
+						<th scope="row">조회수</th>
+						<td th:text="${board.hit}"></td>
+					</tr>
+					<tr>
+						<th scpoe="row">카테고리</th>
+						<td th:text="${board.catename}"></td>
+					</tr>
+					<tr>
+						<th scope="row">작성자</th>
+						<td th:text="${board.custid}"></td>
+						<th scope="row">작성일</th>
+						<td th:text="${board.rdate}"></td>
+					</tr>
+					<tr>
+						<th scope="row">제목</th>
+						<td colspan="3" id="title" th:text="${board.title}">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">내용</th>
+						<td colspan="5" id="summernote" name="content" th:utext="${board.content}"></td>
+					</tr>
+				</tbody>
+			</table>
+			 <input type="hidden" name="postid" th:value="${board.postid}">
+		</form>
+		
+		<span class="send_btn">
+			<button id="back"><a th:href="@{/board}">목록</a></button>
+		</span>
+		<span class="send_btn">
+			<button id="delete"><a th:href="@{/board/boarddelete(postid=${board.postid})}">삭제하기</a></button>
+		</span>
+	
+ 	<!-- 댓글 -->
+ 	<!-- 댓글 목록 -->
+ 	<tbody id="clist">
+ 		<tr th:each="reply : ${reply}">
+ 			<td th:text="${reply.custid}"></td>
+ 			<td th:text="${reply.coment}"></td>
+ 			<td th:text="${reply.rdate}"></td>
+ 		</tr>
+ 	
+ 	<div class="card my-4">
+ 		<h5 class="card-header">댓글</h5>
+ 			<div class="card-body">
+	 			<form name="commentForm" th:action="@{/board/commentWrite}" autocomplete="off">
+	 				<div class="input-group">
+	 					<input type="hidden" name="postid" th:value="${board.postid}">
+	 					<textarea class="form-control" id="coment" name="coment" rows="3" placeholder="댓글을 입력하세요"></textarea>
+	 				</div>	
+	 					<button class="comentRegi" type="submit">등록</button>
+	 			</form>
+	 		</div>
+ 	</div>
+ 	
+ 		
+ 	</tbody>
+ </div>
+</body>
+</html>

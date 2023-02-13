@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admin.mapper.BoardMapper">
+	 
+	<select id="selectBoardList" resultType="Board">
+		<![CDATA[
+		SELECT x.postid, x.custid, x.title, x.content, x.hit, x.rdate, x.catename
+		FROM (
+			SELECT @rownum:=@rownum+1 as rn, a.postid, a.custid, a.title, a.content, a.hit, a.rdate, a.catename
+			FROM(
+				SELECT postid, custid, title, content, hit, rdate, catename
+				FROM board
+			]]>
+				<if test="searchWord != null">
+						where ${searchKey} like '%${searchWord}%'
+					</if>
+					<![CDATA[
+					order by postid DESC) a, (SELECT @rownum:=0)R
+				WHERE @rownum <= #{pageNum}*#{total}) x
+			WHERE x.rn > (#{pageNum}-1)*#{total}
+			]]>
+	</select>
+	
+	<select id="getTotalData" resultType="int">
+		SELECT COUNT(postid) FROM board
+		<if test="searchWord!=null">
+			WHERE ${searchKey} LIKE '%${searchWord}%'
+		</if>
+	</select>
+	
+	<update id="updateHitCount" parameterType="int">
+		UPDATE board SET hit=hit+1 WHERE postid=${postid}
+	</update>
+	
+	<select id="selectBoard" parameterType="int" resultType="Board">
+		SELECT  postid, catename, custid, title, hit, content, rdate, catename FROM board WHERE postid=${postid}
+	</select>
+
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board WHERE postid=#{postid}
+	</delete>
+	
+	<insert id="insertComment" parameterType="Board">
+		INSERT INTO board(postid, custid, content, highpostid, rdate) VALUES(#{postid}, #{custid}, #{content}, #{highpostid}, NOW())
+	</insert>
+ </mapper>
