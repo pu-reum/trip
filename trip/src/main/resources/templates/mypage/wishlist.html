@@ -1,52 +1,54 @@
-<h1>위시리스트</h1>
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-    <!-- Registration Start -->
-    <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
-        <div class="container py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-7 mb-5 mb-lg-0">
-                    <div class="mb-4">
-                        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">MEGA OFFER</h6>
-                        <h1 class="text-white"><span class="text-primary">10% OFF</span> 인기 TOP5 맛집 방문시</h1>
-                    </div>
-                    <p class="text-white">일상에서구조 사이트에서 추천하는 인기 TOP5 맛집에 방문하여 아이디를 제시하시면 10% 할인이 적용됩니다.</p>
-                    <ul class="list-inline text-white m-0">
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>2023-01-01 이후 가입자에 한함.</li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>한 아이디당 1회 적용 가능.</li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>중복 할인 불가.</li>
-                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>이 이벤트는 예고없이 종료될 수 있음.</li>
-                    </ul>
-                </div>
-                <div class="col-lg-5">
-                    <div class="card border-0">
-                        <div class="card-header bg-primary text-center p-4">
-                            <h1 class="text-white m-0">Quick Search</h1>
-                        </div>
-                        <div class="card-body rounded-bottom bg-white p-5">
-                            <form>
-                                <div class="form-group">
-                                    <select class="custom-select px-4" style="height: 47px;">
-                                        <option selected>전국 맛집 리스트</option>
-                                        <option value="1">서울</option>
-                                        <option value="2">경기도</option>
-                                        <option value="3">인천</option>
-                                        <option value="4">강원도</option>
-                                        <option value="5">충청도</option>
-                                        <option value="6">경상도</option>
-                                        <option value="7">전라도</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary btn-block py-3" type="submit">추천 맛집 보러 가기</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Registration End -->
-    
-     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Ashion Template">
+<meta name="keywords" content="Ashion, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Wishlist</title>
+
+<!-- Google Font -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Cookie&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+	rel="stylesheet">
+</head>
+<br>
+<br>
+<body>
+	<!-- Trend Section Begin -->
+	<section id="container">
+		<div class="container">
+			<div class="row">
+				<div class='col-sm-4'>
+					<tr><h4>
+					 <td colspan="2">여행지 <i class="fa-solid fa-umbrella-beach"></i></td>
+					</h4></tr>
+					<tr th:each="w:${wishlist}">
+					<td th:text="${w.pdid}"></td>
+					<td th:text="${w.pdname}"></td>
+					</tr>
+				</div>
+
+
+
+				<div class='col-sm-4'>
+					<h4>
+						맛집 <i class="fa-solid fa-utensils"></i>
+					</h4>
+				</div>
+				
+				<div class='col-sm-4'>
+					<h4>
+						축제 <i class="fa-solid fa-fire-flame-simple"></i>
+					</h4>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+<!-- Trend Section End -->

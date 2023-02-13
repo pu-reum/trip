@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trip.mapper.WishlistMapper">
+	<select id="getWishlistAllList" parameterType="String" resultType="Wishlist">
+		SELECT w.wid, w.pdid, p.pdname, w.custid
+		FROM wishlist w
+		INNER JOIN placedet p
+		ON p.pdid=w.wid
+	 	WHERE custid = #{custid}
+	</select>
+	<insert id="addWishlist" parameterType="Wishlist">
+		INSERT
+		INTO wishlist(wid, pdid, custid)
+		VALUES(#{wid},#{pdid}, #{custid})
+	</insert>
+	<delete id="deleteByPdid" parameterType="Integer">
+		DELETE FROM wishlist
+		WHERE pdid=#{pdid}
+	</delete>
+</mapper>

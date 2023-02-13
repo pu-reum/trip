@@ -29,7 +29,7 @@ public class CalendarController {
 
 
 	@GetMapping("/fullcalendar")
-	@ResponseBody  //비동기 방식일때 
+	@ResponseBody
 	public List<Calendar> getPlan(@SessionAttribute(required = false ,  value= "logincust") Cust cust) {
 		return calendarService.getCalendarAllList(cust.getCustid());
 	}

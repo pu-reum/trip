@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @RequiredArgsConstructor
-@Transactional  //service 항상 붙이기 
+@Transactional 
 @Service
 public class CalendarService {
 	
