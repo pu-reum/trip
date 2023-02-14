@@ -40,4 +40,7 @@ public class BoardService{
 		return bmp.getTotalData();
 	}
 	
+	public List<Board> bList() throws Exception{
+		return bmp.bList();
+	}
 }

@@ -25,4 +25,6 @@ public interface BoardMapper{
 	//페이지네이션
 	int getTotalData();
 	
+	List<Board> bList() throws Exception;
+	
 }

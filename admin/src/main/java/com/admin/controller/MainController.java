@@ -10,12 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.admin.dto.Admin;
+import com.admin.dto.Board;
 import com.admin.dto.Criteria;
 import com.admin.dto.Cust;
 import com.admin.dto.Inquiry;
 import com.admin.dto.Page;
 import com.admin.dto.Placedet;
 import com.admin.service.AdminService;
+import com.admin.service.BoardService;
 import com.admin.service.CustService;
 import com.admin.service.InquiryService;
 import com.admin.service.PlacedetService;
@@ -35,6 +37,9 @@ public class MainController {
 	@Autowired
 	InquiryService iservice;
 	
+	@Autowired
+	BoardService bservice;
+	
 	@RequestMapping("/")
 	public String index(Model model) {
 		int mc;
@@ -42,6 +47,7 @@ public class MainController {
 		List<Admin> list=null;
 		List<Placedet> plist=null;
 		List<Inquiry> ilist=null;
+		List<Board> blist=null;
 		
 		try {
 			// 회원수 정보
@@ -55,7 +61,8 @@ public class MainController {
 			model.addAttribute("list", list);
 			
 			// 인기 게시판
-			
+			blist=bservice.bList();
+			model.addAttribute("blist", blist);
 			
 			// 1:1문의(new)
 			ilist=iservice.iList();

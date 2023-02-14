@@ -45,4 +45,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<insert id="insertComment" parameterType="Board">
 		INSERT INTO board(postid, custid, content, highpostid, rdate) VALUES(#{postid}, #{custid}, #{content}, #{highpostid}, NOW())
 	</insert>
+	
+	
+	<select id="bList" resultType="Board">
+		SELECT * FROM board ORDER BY hit desc LIMIT 10
+	</select>
+	
  </mapper>

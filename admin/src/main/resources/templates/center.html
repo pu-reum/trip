@@ -44,10 +44,10 @@
                       new ApexCharts(document.querySelector("#reportsChart"), {
                         series: [{
                           name: 'boards',
-                          data: [31, 40, 28, 51, 42, 82, 56],
+                          data: [1, 5, 5, 5, 5, 5],
                         }, {
                           name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
+                          data: [3, 4, 5, 6, 7, 8]
                         }],
                         chart: {
                           height: 350,
@@ -78,11 +78,11 @@
                         },
                         xaxis: {
                           type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                          categories: ["02-12", "02-13", "02-14", "02-15", "02-16", "02-17"]
                         },
                         tooltip: {
                           x: {
-                            format: 'dd/MM/yy HH:mm'
+                            format: 'dd/MM'
                           },
                         }
                       }).render();
@@ -113,11 +113,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                      <tr th:each="b:${blist}">
+                        <td th:text="${b.catename}"></td>
+                        <td><a th:text="${b.title}" href="#"  style="color: black;"></a></td>
+                        <td th:text="${b.custid}"></td>
+                        <td th:text="${b.hit}"></td>
                       </t>
                     </tbody>
                   </table>

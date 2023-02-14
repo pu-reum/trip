@@ -58,6 +58,7 @@ public class CourseController {
 		Course course=null;
 		try {
 			course=service.get(cid);
+			System.out.println(course);
 			model.addAttribute("c", course);
 			model.addAttribute("center", dir+"courseview");
 		} catch (Exception e) {
@@ -93,7 +94,7 @@ public class CourseController {
 			
 			service.register(course);
 	
-			model.addAttribute("center", "coursewriteOk");
+			model.addAttribute("center", "course/coursewriteOk");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "redirect:/courseWrite";

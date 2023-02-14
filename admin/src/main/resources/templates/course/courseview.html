@@ -4,22 +4,22 @@
 	<div id="main">
 
 		<div class="box alt container">
-			<section class="feature left">
-				<img th:src="@{/img/baquarium.jpg}" alt="" /></a>
+			<section class="feature left">				
 				<div class="content">
+					<img th:src="@{/img/upload/}+${c.cdimg1}" alt="" />
 					<h3 th:text="${c.cdname1}"></h3>
 					<p th:text="${c.cdcontent1}"></p>
 				</div>
 			</section>
 			<section class="feature left">
-				<img th:src="@{/img/baquarium.jpg}" alt="" /></a>
+				<img th:src="@{/img/upload/}+${c.cdimg2}" alt="" />
 				<div class="content">
 					<h3 th:text="${c.cdname2}"></h3>
 					<p th:text="${c.cdcontent2}"></p>
 				</div>
 			</section>
 			<section class="feature left">
-				<img th:src="@{/img/baquarium.jpg}" alt="" /></a>
+				<img th:src="@{/img/upload/}+${c.cdimg3}" alt="" />
 				<div class="content">
 					<h3 th:text="${c.cdname3}"></h3>
 					<p th:text="${c.cdcontent3}"></p>
