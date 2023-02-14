@@ -16,39 +16,77 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
 	rel="stylesheet">
+
+<script>
+
+function delcheck(){
+	var check=confirm("삭제하시겠습니까?");
+	if(check==true){
+		return true;
+	}else if(check==false){
+		return false;
+	}
+};
+
+
+/*function deleteRow(ths){
+	var ths = $(ths);
+	
+	ths.parents("tr").remove();
+};*/
+/*$(document).ready(function() {
+
+	function deleteRow(){
+    var wid = $("#wid").val();
+    var data = {
+    		"wid" : wid	
+    		
+    };
+    
+    var request =
+    	$.ajax({
+    		url : '/mypage/delWishlist',
+    		contentType : "application/json; charset=utf-8",
+    		method : "delete",
+    		dataType : "json",
+    		data : JSON.stringify(data),
+    		success : function(result){
+    			console.log("aa");
+    		}
+    	});	
+	
+		};
+});*/
+
+</script>
+
 </head>
 <br>
 <br>
 <body>
-	<!-- Trend Section Begin -->
+	<!-- wishlist -->
 	<section id="container">
 		<div class="container">
 			<div class="row">
-				<div class='col-sm-4'>
-					<tr><h4>
-					 <td colspan="2">여행지 <i class="fa-solid fa-umbrella-beach"></i></td>
-					</h4></tr>
-					<tr th:each="w:${wishlist}">
-					<td th:text="${w.pdid}"></td>
-					<td th:text="${w.pdname}"></td>
-					</tr>
-				</div>
+				<table class="table" id="wishlisttable">
+					<thead>
+						<tr style="text-align: center;">
+							<th class="no"><a>no.</a></th>
+							<th class="pdid"><a>상세 번호</a></th>
+							<th class="title col-6"><a>위시리스트</a></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr style="text-align: center;" th:each="w : ${wishlist}">
+							<td id="wid" th:text="${w.wid}"></td>
+							<td th:text="${w.pdid}"></td>
+							<td th:text="${w.pdname}"></td>
+							<td><a th:href="@{/mypage/delWishlist(wid=${w.wid})}"
+								onclick="return delcheck();">X</a></td>
+						</tr>
 
-
-
-				<div class='col-sm-4'>
-					<h4>
-						맛집 <i class="fa-solid fa-utensils"></i>
-					</h4>
-				</div>
-				
-				<div class='col-sm-4'>
-					<h4>
-						축제 <i class="fa-solid fa-fire-flame-simple"></i>
-					</h4>
-				</div>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</section>
-</body>
-<!-- Trend Section End -->

@@ -64,10 +64,11 @@ public class WishlistController {
 		return result;
 	}
 	
-	@DeleteMapping("/delWishlist")
-	@ResponseBody
-	public void deleteByPdid(@RequestBody int pdid, @SessionAttribute(required = false ,  value= "logincust") Cust cust) {
-		wishlistService.deleteByPdid(pdid);
+	@RequestMapping("/delWishlist")
+	public String deleteByWid(int wid, HttpSession session) throws Exception {
+		
+		wishlistService.deleteByWid(wid);
+		return "redirect:/mypage/wishlist";
 	}
 	
 	

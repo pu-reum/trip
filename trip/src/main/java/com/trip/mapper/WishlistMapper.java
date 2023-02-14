@@ -14,7 +14,7 @@ public interface WishlistMapper {
 	
 	void addWishlist(Wishlist wishlist);
 
-	void deleteByPdid(Integer pdid);
+	void deleteByWid(Integer wid);
 	
 
 }

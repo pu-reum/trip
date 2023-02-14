@@ -130,72 +130,66 @@ th, td {
 	}
 
 	$(document).ready(function() {
-		
-		
- 		center(lat, lng);
+
+		center(lat, lng);
 
 		//heart();
-		
+
 		//위시리스트 버튼 클릭시 발생
-		$(".btn_wish").click(function(){
-			
+		$(".btn_wish").click(function() {
+
 			var pdid = $("#pdid").val();
-		//	var pdname = $("#pdname").val();
+			//	var pdname = $("#pdname").val();
 			var data = {
-					"pdid" : pdid
+				"pdid" : pdid
 			};
-			
+
 			console.log(data);
-			
-			var request =
-				$.ajax({
-					url : '/mypage/addWishlist',
+
+			var request = $.ajax({
+				url : '/mypage/addWishlist',
 				//	async : true,
-					contentType : "application/json; charset=utf-8",
-					method : "post",
-					dataType : "json",
-					data : JSON.stringify(data),
-					success : function(result){
-						
-						if(result == 1){
-							console.log(result);
-							alert("위시리스트에 추가하였습니다.");
-						}else{
-							alert("로그인 후 사용하실 수 있습니다.");
-					 }
+				contentType : "application/json; charset=utf-8",
+				method : "post",
+				dataType : "json",
+				data : JSON.stringify(data),
+				success : function(result) {
+
+					if (result == 1) {
+						console.log(result);
+						alert("위시리스트에 추가하였습니다.");
+					} else {
+						alert("로그인 후 사용하실 수 있습니다.");
 					}
-
-				});
-				
-			
-				console.log("add");
-				alert('위시리스트에 추가되었습니다.');
-			})
-			console.log("add wishlist");
-
-
-			
-/*			$.ajax({
-//		    	url : "/mypage/wishlist",
-				url : "/mypage/addWishlist",
-				type : "post",
-				data : data,
-				success : function(result){
-					
-				if(result == 1){
-					alert("위시리스트에 추가하였습니다.");
-				}else{
-					alert("로그인 후 사용하실 수 있습니다.");
 				}
-			},
-			error : function(){
-				alert("위시리스트 담기 실패...");	
-			}
-		});*/
-		
-		});
 
-//	});
+			});
+
+			console.log("add");
+
+		})
+
+		/*			$.ajax({
+		 //		    	url : "/mypage/wishlist",
+		 url : "/mypage/addWishlist",
+		 type : "post",
+		 data : data,
+		 success : function(result){
+		
+		 if(result == 1){
+		 alert("위시리스트에 추가하였습니다.");
+		 }else{
+		 alert("로그인 후 사용하실 수 있습니다.");
+		 }
+		 },
+		 error : function(){
+		 alert("위시리스트 담기 실패...");	
+		 }
+		 });*/
+
+	});
+
+	//	});
 </script>
 <body>
 	<div class="container">
@@ -215,7 +209,10 @@ th, td {
 						</td>
 						<th scope="row"></th>
 						<td>
-							<button type="button" class="btn btn-outline-success btn_wish btn-sm">위시리스트<i class="fa-solid fa-pencil"></i></button>
+							<button type="button"
+								class="btn btn-outline-success btn_wish btn-sm">
+								위시리스트<i class="fa-solid fa-pencil"></i>
+							</button>
 						</td>
 					</tr>
 
@@ -228,7 +225,8 @@ th, td {
 				</tbody>
 			</table>
 			<input type="hidden" id="pdid" name="pdid" th:value="${place.pdid}">
-			<input type="hidden" id="pdname" name="pdname" th:value="${place.pdname}">
+			<input type="hidden" id="pdname" name="pdname"
+				th:value="${place.pdname}">
 		</form>
 		<br> <img id="img" th:src="${place.imgname1}"> <br>
 

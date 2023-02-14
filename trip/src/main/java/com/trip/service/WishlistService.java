@@ -25,7 +25,7 @@ public class WishlistService {
 		wishlistMapper.addWishlist(wishlist);
 	}
 	
-	public void deleteByPdid(int pdid) {
-		wishlistMapper.deleteByPdid(pdid);
+	public void deleteByWid(int wid) {
+		wishlistMapper.deleteByWid(wid);
 	}
 }

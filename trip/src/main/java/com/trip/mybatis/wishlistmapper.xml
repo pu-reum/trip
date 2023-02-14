@@ -5,7 +5,7 @@
 		SELECT w.wid, w.pdid, p.pdname, w.custid
 		FROM wishlist w
 		INNER JOIN placedet p
-		ON p.pdid=w.wid
+		ON p.pdid=w.pdid
 	 	WHERE custid = #{custid}
 	</select>
 	<insert id="addWishlist" parameterType="Wishlist">
@@ -13,8 +13,8 @@
 		INTO wishlist(wid, pdid, custid)
 		VALUES(#{wid},#{pdid}, #{custid})
 	</insert>
-	<delete id="deleteByPdid" parameterType="Integer">
+	<delete id="deleteByWid" parameterType="Integer">
 		DELETE FROM wishlist
-		WHERE pdid=#{pdid}
+		WHERE wid=#{wid}
 	</delete>
 </mapper>
