@@ -149,8 +149,8 @@
             </thead>
             <tbody>
             <tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
-                <td th:text="${w.pdid}"></td>
-                <td th:text="${w.pdname}"></td>
+                <td th:text="${list.postid}"></td>
+                <td th:text="${list.catename}"></td>
 				<td class="title" id="word-cut"><a th:text="${list.title}" th:href="@{/board/boardview(postid=${list.postid})}"></a></td>
 				<td th:text="${list.custid}"></td>
 				<td th:text="${list.hit}"></td>
