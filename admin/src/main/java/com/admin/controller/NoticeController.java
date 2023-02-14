@@ -40,8 +40,8 @@ public class NoticeController {
 	@Value("${admindir}")
 	String admindir;
 	
-	@Value("${custdir}")
-	String custdir;
+//	@Value("${custdir}")
+//	String custdir;
 
 	// 공지 글 리스트
 	@RequestMapping("")
