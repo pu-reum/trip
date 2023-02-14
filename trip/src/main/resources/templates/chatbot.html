@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<style>
+
+#ch {
+  
+  text-align: center;
+
+}
+#me {
+	width: 400px;
+	height: 200px;
+	overflow: auto;
+
+	margin:15px;
+}
+.buttons {
+  margin: 30px auto;
+}
+button {
+  background: rgb(255, 238, 0);
+  padding: 15px;
+  border-radius: 25px;
+  border: none;
+  color: gray;
+  font-size: 20px;
+  font-weight: 600;
+  box-shadow: 2px 2px 5px 0px gray;
+}
+#metext {
+  background: rgba(255, 255, 255, 0);
+  width: 50%;
+  height: 30%;
+  padding: 0px 10px 0px 10px;
+  text-align: center;
+  font-size: 15px;
+  border: 2px solid gray;
+  border-radius: 10px;
+}
+h3{
+	margin:15px;
+	
+}
+h4{
+position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);
+width:100%;
+}
+
+
+</style>
+
+<script>
+var stompClient = null;
+var custid = '[[${session.logincust.custid}]]';
+// 서버소켓에 연결
+function connect() {
+	var socket = new SockJS('http://127.0.0.1/chbot');
+	//var socket = new SockJS('http://49.50.172.103/trip/chbot');
+	stompClient = Stomp.over(socket);
+
+	stompClient.connect({}, function(frame) { 
+		setConnected(true);
+		console.log('Connected: ' + frame);
+		
+		stompClient.subscribe('/send/'+custid, function(msg) { 
+			$("#me").prepend(
+					"<h4>" +
+					JSON.parse(msg.body).content1
+							+ "</h4>");
+		});
+		
+	});
+}
+
+// 서버소켓에 연결끊기
+function disconnect() {
+	if (stompClient !== null) {
+		stompClient.disconnect();
+	}
+	setConnected(false);
+	console.log("Disconnected");
+}
+
+// connect&disconnect버턴 활성화/비활성화
+function setConnected(connected) {
+	if (connected) {
+		$("#status").text("Connected");
+	} else {
+		$("#status").text("Disconnected");
+	}
+	
+}
+
+// 서버에 메세지 요청 메서드
+
+	
+function sendMe() {
+	var msg = JSON.stringify({
+		'custid' : custid,
+		'content1' : $('#metext').val()
+	});
+	stompClient.send("/receiveme", {}, msg);
+}
+
+
+$(document).ready(function() {
+	connect();
+	/* $("#connect").click(function() {
+		connect();
+	});
+	$("#disconnect").click(function() {
+		disconnect();
+	}); */
+	
+	$("#sendme").click(function() {
+		sendMe();
+	});
+	
+
+	
+});
+</script>
+
+
+<div class="container" id="ch">
+	<div class="col-sm-5">
+	<h3>챗봇에게 물어보세요</h3>
+	<!-- <H1 id="status">Status</H1> -->
+	<!-- <button id="connect">Connect</button>
+	<button id="disconnect">Disconnect</button>
+	 -->
+	
+	
+
+	
+	<div id="me">
+		
+	</div>
+	
+	
+
+	</div>
+	<input type="text" id="metext"><button id="sendme">Send</button>
+</div>
+</body>
+</html>

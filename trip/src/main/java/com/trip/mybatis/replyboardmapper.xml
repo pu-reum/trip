@@ -12,11 +12,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM replyBoard WHERE postid=#{postid}
 	</select>
 	
-	<update id="updateComment">
+<!-- 	<update id="updateComment">
 		UPDATE replyBoard coment=#{coment} WHERE replyno=#{replyno} AND postid=#{postid}
-	</update>
+	</update> -->
 	
 	<delete id="deleteComment">
-		DELETE FROM replyBoard WHERE replyno=#{replyno} AND postid=#{postid}
+		DELETE FROM replyBoard WHERE replyno=#{replyno}
 	</delete>
 </mapper>

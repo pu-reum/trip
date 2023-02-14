@@ -53,16 +53,7 @@ th, td {
 </style>
 <script>
 	var map;
-	/* var positions =[
-	 {
-	 title: "${place.pdname}",
-	 latlng: new kakao.maps.LatLng("${place.lat}", "${place.lng}")
-	 }
-	 ]; */
-	//var lat=document.getElementById('lat');
-	//lat.innerHTML = lat.getLat();
-	//var lng=document.getElementById('lng');
-	//lng.innerHTML = lng.getLng();
+	
 	//지도 생성
 	function center(lat, lng) {
 		var lat = $('#lat').val();
@@ -85,26 +76,6 @@ th, td {
 		//이미지 생성
 		var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-		/* for(var i=0; i<positions.length;i++){
-			//마커 생성
-			var marker = new kakao.maps.Marker({
-				map: map, //마커를 표시할 지도
-				position: positions[i].latlng, //마커를 표시할 위치
-				image:markerImage //마커 이미지
-			});
-			marker.setMap(map); //마커 지도에 표시
-			console.log(positions);
-			var customOverlay = new kakao.maps.CustomOverlay(
-				{
-					position: positions[i].latlng
-				}		
-			);
-			
-			//커스텀 오버레이 지도에 표시
-			customOverlay.setMap(map);
-			map.setCenter(positions[i].latlng);
-		} */
-
 		var markerPostion = new kakao.maps.LatLng(flat, flng);
 
 		var marker = new kakao.maps.Marker({
@@ -115,24 +86,30 @@ th, td {
 		marker.setMap(map);
 	}
 
-	function heart() {
-		//좋아요가 있는지 확인한 값을 저장
-		var like = "${place.pdlike}"
-		if (like == 1) {
-			console.log(like);
-			$("#imgbtn").prop("th:src", "@{/img/heart.png}");
-			$(".imgbtn").prop('name', like)
-		} else {
-			console.log(like);
-			$("#imgbtn").prop("th:src", "@{/img/love.png}")
-			$(".imgbtn").prop('name', like)
-		}
+	/* function heart() {
+	var heartVal='${heart.pdlike}';
+	
+	if(heartVal>0){
+		console.log(heartVal);
+		$("#imgbtn").prop("src","/img/heart.png");
+		$(".btn").prop('name',heartVal)
+	}else{
+		console.log(heartVal);
+		$("#imgbtn").prop("src","/img/love.png");
+		$(".btn").prop('name',heartVal)
+	}
+} */
+
+	function toggleImg(){
+		$('.btn').click(function(){
+			$('#imgbtn').attr('src','/img/heart.png');
+		});
 	}
 
 	$(document).ready(function() {
 
 		center(lat, lng);
-
+		toggleImg();
 		//heart();
 
 		//위시리스트 버튼 클릭시 발생
@@ -169,27 +146,27 @@ th, td {
 
 		})
 
-		/*			$.ajax({
-		 //		    	url : "/mypage/wishlist",
-		 url : "/mypage/addWishlist",
-		 type : "post",
-		 data : data,
-		 success : function(result){
-		
-		 if(result == 1){
-		 alert("위시리스트에 추가하였습니다.");
-		 }else{
-		 alert("로그인 후 사용하실 수 있습니다.");
-		 }
-		 },
-		 error : function(){
-		 alert("위시리스트 담기 실패...");	
-		 }
-		 });*/
+		/* $(".btn").click(function(){
+		var that=$(".btn");
+	$.ajax({
+		url:'/trip/placedetail/heart',
+		type:'POST',
+		data:{'pdid':'${place.pdid}', 'custid':'${sessionScope.logincust}'},
+		success:function(data){
+			that.prop('name', data);
+			console.log(data);
+			if(data == 1){
+				$('#imgbtn').prop("src","/img/heart.png");
+			}else{
+				$('#imgbtn').prop("src","/img/love.png");
+			}
+		}
+	});
+	}); */
 
 	});
 
-	//	});
+
 </script>
 <body>
 	<div class="container">
@@ -236,6 +213,31 @@ th, td {
 		</div>
 
 
+	<!-- 리뷰 -->
+	<br>
+	<tbody id="relist">
+		<tr th:each="review:${review}">
+			<td th:text="${review.custid}"></td>
+			<td th:text="${review.rcontent}"></td>
+			<td th:text="${review.rdate}"></td>
+			<td><button id="delComment"><a th:href="@{/tirp/placedetail/commentDelete(rid=${review.rid})}">삭제하기</a></button></td><br>
+		</tr>
+	
+	
+	<div class="card my-4">
+		<h5 class="card-header">리뷰를 남겨보세요</h5>
+		<div class="card-body">
+			<form name="comment-form" th:action="@{/trip/placedetail/commentWrite}" method="post" autocomplete="off">
+				<div class="form-group">
+					<input type="hidden" name="pdid" th:value="${place.pdid}">
+					<textarea name="rcontent" id="rcontent" class="form-control" rows="3"></textarea>
+				</div>
+				<button type="submit" class="rv-btn">리뷰 등록</button>
+			</form>
+		</div>
+		
+	</div>
+	</tbody>
 	</div>
 </body>
 </html>

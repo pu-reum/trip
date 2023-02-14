@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trip.dto.ReplyBoard;
-import com.trip.mapper.BoardMapper;
 import com.trip.mapper.ReplyBoardMapper;
 
 @Service
@@ -24,12 +23,12 @@ public class ReplyBoardService {
 	public List<ReplyBoard> selectCommentList(int postid) throws Exception{
 		return rbm.selectCommentList(postid);
 	}
-	//댓글 수정
-	public void updateComment(ReplyBoard rBoard) throws Exception{
-		rbm.updateComment(rBoard);
-	}
+//	//댓글 수정
+//	public void updateComment(ReplyBoard rBoard) throws Exception{
+//		rbm.updateComment(rBoard);
+//	}
 	//댓글 삭제
-	public void deleteComment(ReplyBoard rBoard) throws Exception{
-		rbm.deleteComment(rBoard);
+	public void deleteComment(int replyno) throws Exception{
+		rbm.deleteComment(replyno);
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.trip.dto.Board;
 import com.trip.dto.Criteria;
 
+
 @Repository
 @Mapper
 public interface BoardMapper{
@@ -28,5 +29,6 @@ public interface BoardMapper{
 	//String categoryEnum(Board board);
 	//페이지네이션
 	int getTotalData();
+
 	
 }

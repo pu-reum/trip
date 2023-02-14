@@ -22,6 +22,10 @@
     <link th:href="@{/css/style.css}" rel="stylesheet">
     
     <script src="https://kit.fontawesome.com/bb5cacded7.js" crossorigin="anonymous"></script>
+    
+    <!-- chatbot -->
+    <script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+	<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
 </head>
 
 <body>
@@ -111,6 +115,7 @@
                                 <a th:href="@{/mypage/calendar}" class="dropdown-item">일정</a>
                                 <a th:href="@{/useredit(id=${session.logincust.custid})}" class="dropdown-item">회원정보수정</a>
                                 <a th:href="@{/inquiry}" class="dropdown-item">1:1문의</a>
+                                <a th:href="@{/chatbot}" class="dropdown-item">chatbot</a>
                             </div>
                         </div>
                     </div>

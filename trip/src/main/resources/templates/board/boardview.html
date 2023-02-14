@@ -29,11 +29,29 @@ button{
 </style>
 
 <script>
-/* 	$(document).ready(function(){
-		getCommentList();
-	});
+ 	/* $(document).ready(function(){
+		//getCommentList();
+		
+		$(document).on('click', '.delete_reply_btn', function(e){
+			e.preventDefault();
+			let replyno=$(this).attr("href");
+			
+			$.ajax({
+				data:{
+					'replyno':replyno,
+					'postid':'${reply.postid}'
+				},
+				url:'/board/commentDelete',
+				type:'POST',
+				success:function(result){
+					alert('삭제 완료');
+				}
+			});
+			
+		});
+	}); */
 	
-	function getCommentList(){
+	/*function getCommentList(){
 		var postid = $('input[name=postid]').val();
 		$.ajax({
 			type:'GET',
@@ -112,12 +130,16 @@ button{
 	
  	<!-- 댓글 -->
  	<!-- 댓글 목록 -->
+ 	<br>
+ 	<h5></h5>
  	<tbody id="clist">
  		<tr th:each="reply : ${reply}">
  			<td th:text="${reply.custid}"></td>
  			<td th:text="${reply.coment}"></td>
  			<td th:text="${reply.rdate}"></td>
+ 			<td><button id="delComment"><a th:href="@{/board/commentDelete(replyno=${reply.replyno})}">삭제하기</a></button></td><br>
  		</tr>
+ 		
  	
  	<div class="card my-4">
  		<h5 class="card-header">댓글</h5>

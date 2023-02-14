@@ -131,8 +131,8 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="destination-item position-relative overflow-hidden mb-2">
                         <img class="img-fluid" th:src="${list.imgname1}" alt="">
-                        <input type="hidden" name="lat" th:text="${list.lat}">
-                        <input type="hidden"  name="lng" th:text="${list.lng}">
+                       <!--  <input type="hidden" name="lat" th:text="${list.lat}">
+                        <input type="hidden"  name="lng" th:text="${list.lng}"> -->
                         <a class="destination-overlay text-white text-decoration-none" th:text="${list.pdname}" th:href="@{/trip/placedetail(pdid=${list.pdid})}"></a>
                     </div>
                 </div>

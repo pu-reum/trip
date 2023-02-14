@@ -71,7 +71,7 @@ public class BoardController {
 	}
 	//글 상세보기
 	@GetMapping("/boardview")
-	public String boardview(Model model, int postid)throws Exception {
+	public String boardview(Model model, int postid) throws Exception {
 		
 		Board board=bs.selectBoard(postid);
 		model.addAttribute("board", board);
@@ -123,11 +123,11 @@ public class BoardController {
 	
 	@PostMapping(value="/uploadSummernoteImageFile", produces="application/json")
 	@ResponseBody
-	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+	public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
 		System.out.println("122");
 		JsonObject jsonObject = new JsonObject();
 		
-		String fileRoot ="C:\\summernoteImage\\"; //저장될 외부 파일 경로
+		String fileRoot ="C:\\summernote_Image\\"; //저장될 외부 파일 경로
 		
 		/*
 		 * 내부
@@ -147,15 +147,16 @@ public class BoardController {
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); //파일저장
-			jsonObject.addProperty("url", "C:\\summernote_image\\"+savedFileName);
+			jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
 			jsonObject.addProperty("responseCode", "success");
 		}catch(IOException e) {
 			FileUtils.deleteQuietly(targetFile); //저장된 파일 삭제
 			jsonObject.addProperty("responseCode","error");
 			e.printStackTrace();
 		}
-		String result = jsonObject.toString();
-		return result;
+		//String result = jsonObject.toString();
+		return jsonObject;
 	}
+	
 	
 }

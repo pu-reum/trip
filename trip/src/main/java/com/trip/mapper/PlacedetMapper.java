@@ -1,6 +1,7 @@
 package com.trip.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,13 @@ public interface PlacedetMapper{
 	
 	//delete
 	void deletePlace(int pdid) throws Exception;
+	
+	//좋아요
+//	Placedet findHeart(Map<String, Object> number) throws Exception;
+//	
+//	Placedet findHeart(Placedet heart)throws Exception;
+//	
+//	int insertHeart(Placedet heart) throws Exception;
+//	
+//	void deleteHeart(Placedet heart) throws Exception;
 }

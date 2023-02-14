@@ -38,7 +38,7 @@ public class Board {
 
 	public Board(int postid, String custid, String content, int highpostid, LocalDate rdate) {
 		super();
-		this.postid = postid;
+		this.postid = postid; //댓글 시퀀스
 		this.custid = custid;
 		this.content = content;
 		this.highpostid = highpostid; //원글번호

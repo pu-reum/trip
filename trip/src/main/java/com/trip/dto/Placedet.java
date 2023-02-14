@@ -31,6 +31,8 @@ public class Placedet {
 	private int hit;
 	private Date rdate;
 	
+	private String custid;
+	
 	public Placedet(int pdid, int cateid, String pdname, String pddesc, String pdaddr, String imgname1,
 			String lat, String lng, int pdlike, int hit) {
 		super();
@@ -78,12 +80,11 @@ public class Placedet {
 		this.pdlike = pdlike;
 		this.hit = hit;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public Placedet(int pdid, int pdlike, String custid) {
+		super();
+		this.pdid = pdid;
+		this.pdlike = pdlike;
+		this.custid = custid;
+	}
 }

@@ -47,4 +47,20 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<update id="updateHitCount" parameterType="int">
 		UPDATE placedet SET hit=hit+1 WHERE pdid=${pdid}
 	</update>
+	
+	 <!-- <select id="findHeart" parameterType="HashMap" resultType="Placedet">
+		SELECT * FROM placedet WHERE pdid=#{pdid}
+	</select>
+	
+	<select id="findHeart" parameterType="Placedet" resultType="Placedet">
+		SELECT * from placedet WHERE pdid=#{pdid} 
+	</select>
+	
+	<insert id="insertHeart">
+		INSERT INTO placedet(pdid, pdlike) VALUES(#{pdid}, 1)
+	</insert>
+	
+	<delete id="deleteHeart">
+		DELETE FROM placedet WHERE pdid=#{pdid} 
+	</delete> -->
 </mapper>

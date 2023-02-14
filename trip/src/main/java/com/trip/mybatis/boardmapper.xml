@@ -50,7 +50,5 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM board WHERE postid=#{postid} AND custid=#{custid}
 	</delete>
 	
-	<insert id="insertComment" parameterType="Board">
-		INSERT INTO board(postid, custid, content, highpostid, rdate) VALUES(#{postid}, #{custid}, #{content}, #{highpostid}, NOW())
-	</insert>
+	
  </mapper>

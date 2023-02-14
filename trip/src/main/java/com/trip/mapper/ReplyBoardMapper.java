@@ -15,7 +15,7 @@ public interface ReplyBoardMapper {
 	//댓글 목록
 	List<ReplyBoard> selectCommentList(int postid) throws Exception;
 	//댓글 수정
-	void updateComment(ReplyBoard rBoard) throws Exception;
+	//void updateComment(ReplyBoard rBoard) throws Exception;
 	//댓글 삭제 
-	void deleteComment(ReplyBoard rBoard) throws Exception;
+	void deleteComment(int replyno) throws Exception;
 }
