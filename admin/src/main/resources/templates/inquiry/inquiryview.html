@@ -75,7 +75,7 @@ button{
 					
 					<tr th:if="${inquiry.file != null}">
 						<th scope="row">첨부파일</th>
-						<td colspan="5"><img id="upimg" th:src="@{img/upload}+${inquiry.file}"/></td>
+						<td colspan="5"><img id="upimg" th:src="@{/img/upload/}+${inquiry.file}"/></td>
 					</tr>
 				</tbody>
 			</table>
