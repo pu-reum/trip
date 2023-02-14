@@ -17,15 +17,10 @@ public class ReplyBoardController {
 	@Autowired
 	ReplyBoardService rbs;
 	
-	@RequestMapping("/commentWrite")
-	public String insertComment(ReplyBoard rBoard, HttpSession session) throws Exception{
-		
-		Cust cust=(Cust) session.getAttribute("logincust");
-		rBoard.setCustid(cust.getCustid());
-		
-		rbs.insertComment(rBoard);
-		
-		return "redirect:/board/boardview?postid=" +rBoard.getPostid(); 
+	//댓글 삭제
+	@RequestMapping("/commentDelete")
+	public void deleteComment(int replyno) throws Exception{
+		rbs.deleteComment(replyno);
 	}
 	
 

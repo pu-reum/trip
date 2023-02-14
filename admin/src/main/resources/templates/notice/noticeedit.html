@@ -129,10 +129,12 @@
 		        fontNmaes: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
 		        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 			callbacks: { //이미지 첨부
-				onImageUpload: function(files){
-					uploadSummernoteImageFile(files[0],this);
+				onImageUpload: function(files,editor,welEditable){
+					for(var i=files.length-1;i>=0;i--){
+						uploadSummernoteImageFile(files[i],this);
+					}
 				},
-				onPaste: function(e){
+				/* onPaste: function(e){
 					var clipboardData =e.originalEvent.clipboardData;
 					if(clipboardData && clipboardData.items && clipboardData.item.length){
 						var item=clipboardData.items[0];
@@ -140,11 +142,11 @@
 							e.preventDefault();
 						}
 					}
-				}
+				} */
 			}
 		});
 		/*이미지 업로드*/
-		function uploadSummernoteImageFile(file, editor){
+		function uploadSummernoteImageFile(file, el){
 			data=new FormData();
 			data.append("file",file);
 			$.ajax({
@@ -152,9 +154,11 @@
 				type:"POST",
 				url:"uploadSummernoteImageFile",
 				contentType:false,
+				enctype : 'multipart/form-data',
 				processData:false,
 				success:function(data){
-					$(editor).summernote('insertImage', data.url);
+					console.log("img : "+data.url);
+					$(el).summernote('editor.insertImage', data.url);
 				}
 			});
 		}

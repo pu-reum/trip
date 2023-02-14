@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 						where ${searchKey} like '%${searchWord}%'
 					</if>
 					<![CDATA[
-					order by noid DESC) A, (SELECT @rownum:=0)R
+					order by noid DESC) a, (SELECT @rownum:=0)R
 				WHERE @rownum <= #{pageNum}*#{total}) x
 			WHERE x.rn > (#{pageNum}-1)*#{total}
 			]]>
@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 
 	
 	<insert id="insertNotice" parameterType="Notice">
-		INSERT INTO notice VALUES(NULL, #{adid}, #{nottitle}, #{notice}, null, #{hit}, NOW())
+		INSERT INTO notice VALUES(NULL, #{adid}, #{nottitle}, #{notice}, #{file}, #{hit}, NOW())
 	</insert>
 	
 	<update id="updateNotice">

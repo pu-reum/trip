@@ -114,20 +114,10 @@ button{
  			<td th:text="${reply.custid}"></td>
  			<td th:text="${reply.coment}"></td>
  			<td th:text="${reply.rdate}"></td>
+ 			<td><button id="delComment"><a th:href="@{/board/commentDelete(replyno=${reply.replyno})}">삭제하기</a></button></td><br>
  		</tr>
  	
- 	<div class="card my-4">
- 		<h5 class="card-header">댓글</h5>
- 			<div class="card-body">
-	 			<form name="commentForm" th:action="@{/board/commentWrite}" autocomplete="off">
-	 				<div class="input-group">
-	 					<input type="hidden" name="postid" th:value="${board.postid}">
-	 					<textarea class="form-control" id="coment" name="coment" rows="3" placeholder="댓글을 입력하세요"></textarea>
-	 				</div>	
-	 					<button class="comentRegi" type="submit">등록</button>
-	 			</form>
-	 		</div>
- 	</div>
+ 	
  	
  		
  	</tbody>

@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 				FROM(
 					SELECT inquiryid, custid, icate, icontent, file, iprocess, rdate
 					FROM inquiry
-					order by inquiryid DESC) A, (SELECT @rownum:=0)R
+					order by inquiryid DESC) a, (SELECT @rownum:=0)R
 				WHERE @rownum <= #{pageNum}*#{total}) x
 			WHERE x.rn > (#{pageNum}-1)*#{total}
 		]]>

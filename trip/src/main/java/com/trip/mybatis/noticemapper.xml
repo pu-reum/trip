@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 						where ${searchKey} like '%${searchWord}%'
 					</if>
 					<![CDATA[
-					order by noid DESC) A, (SELECT @rownum:=0)R
+					order by noid DESC) a, (SELECT @rownum:=0)R
 				WHERE @rownum <= #{pageNum}*#{total}) x
 			WHERE x.rn > (#{pageNum}-1)*#{total}
 			]]>
@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="getTotalData" resultType="int">
 		SELECT COUNT(noid) FROM notice
 		<if test="searchWord!=null">
-			where ${searchKey} like '%${searchWord}%'
+			WHERE ${searchKey} LIKE '%${searchWord}%'
 		</if>
 	</select>
 	

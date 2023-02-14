@@ -10,7 +10,10 @@ public class ImgUtil {
 		String file = mf.getOriginalFilename();
 		try {
 			data = mf.getBytes();
-			
+//			FileOutputStream fo = 
+//					new FileOutputStream(custdir+file);
+//			fo.write(data);
+//			fo.close();
 			FileOutputStream fo2 = 
 					new FileOutputStream(admindir+file);
 			fo2.write(data);
