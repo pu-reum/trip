@@ -1,32 +1,43 @@
 <link rel="stylesheet" th:href="@{/css/main.css}" />
 
-	<!-- Main -->
-	<div id="main">
+<!-- START THE FEATURETTES -->
 
-		<div class="box alt container">
-			<section class="feature left">				
-				<div class="content">
-					<img th:src="@{/img/upload/}+${c.cdimg1}" alt="" />
-					<h3 th:text="${c.cdname1}"></h3>
-					<p th:text="${c.cdcontent1}"></p>
-				</div>
-			</section>
-			<section class="feature left">
-				<img th:src="@{/img/upload/}+${c.cdimg2}" alt="" />
-				<div class="content">
-					<h3 th:text="${c.cdname2}"></h3>
-					<p th:text="${c.cdcontent2}"></p>
-				</div>
-			</section>
-			<section class="feature left">
-				<img th:src="@{/img/upload/}+${c.cdimg3}" alt="" />
-				<div class="content">
-					<h3 th:text="${c.cdname3}"></h3>
-					<p th:text="${c.cdcontent3}"></p>
-				</div>
-			</section>
-		</div>
-		
+	<div>
+		<h1 th:text="${c.cname}"></h1>
 	</div>
-		
-		
+    <hr class="featurette-divider">
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading fw-normal lh-1" th:text="${c.cdname1}"></h2>
+        <p class="lead" th:text="${c.cdcontent1}"></p>
+      </div>
+      <div class="col-md-5">
+        <img th:src="@{/img/upload/}+${c.cdimg1}"/>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading fw-normal lh-1" th:text="${c.cdname2}"></h2>
+        <p class="lead" th:text="${c.cdcontent2}"></p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <img th:src="@{/img/upload/}+${c.cdimg2}"/>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading fw-normal lh-1"  th:text="${c.cdname3}"></h2>
+        <p class="lead" th:text="${c.cdcontent3}"></p>
+      </div>
+      <div class="col-md-5">
+        <img th:src="@{/img/upload/}+${c.cdimg3}"/>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
