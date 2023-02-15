@@ -115,7 +115,7 @@
 		});
 		
 		$('#summernote').summernote({
-			placeholder : '공지사항을 적어주세요.',
+			placeholder : '여행 기록을 남겨 보세요. 최대 2048자까지 적을 수 있습니다.',
 			tabsize : 2,
 			height : 300,
 			focus: true,
@@ -183,7 +183,7 @@
 	<br>
 	<div class="container">
 	
-		<form method="post" th:action="@{/notice/noticewriteok}" enctype="multipart/form-data">
+		<form method="post" th:action="@{/notice/noticewriteok}">
 			<ul>		
 				<li><input type="text" name="nottitle" id="nottitle" size="100" placeholder="제목"/></li><br>
 				<li><textarea type="text" id="summernote" name="notice" ></textarea></li><br>

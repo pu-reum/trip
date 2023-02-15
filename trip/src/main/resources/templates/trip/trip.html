@@ -151,6 +151,8 @@
         	
            <a class="page-link" th:if="*{criteria.pageNum>1}" th:href="@{/trip/trip(pageNum=*{criteria.pageNum-1})}">
                		<code>PREV</code></a>
+               		
+                <a class="page-link" th:if="*{prev}" th:href="*{startPage-1}"><code>prev</code></a>
                 
                 <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
                 
