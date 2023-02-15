@@ -20,7 +20,7 @@
 
 ✨ **개발 도구**
 
-![수행 도구](https://user-images.githubusercontent.com/117332854/218950793-517713fb-ac88-4bbf-bac1-69dba46c6d7c.png)
+![수행 도구](https://user-images.githubusercontent.com/117332854/218965156-b3ba51c9-3a5f-4e67-a003-4296a5c3a1ef.png)
 
 ## 4. DB 설계
 
