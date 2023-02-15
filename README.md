@@ -41,6 +41,6 @@
 
 ## 9. 트러블 슈팅
 
-![trouble](https://user-images.githubusercontent.com/117332854/218983913-d3ba91f1-bfa9-41bc-b064-ebee51514396.png)
+![trouble](https://user-images.githubusercontent.com/117332854/219039047-6c1c36e9-2b10-490b-912c-78f802b06266.png)
 
 
