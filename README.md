@@ -32,7 +32,7 @@
 
 ## 6. 프로젝트 구성원 및 역할
 
-![역할](https://user-images.githubusercontent.com/117332854/218980991-cf9a5f9f-33e2-4b93-9c13-bc62fed6ab1b.png)
+![역할](https://user-images.githubusercontent.com/117332854/218985220-4842a6cf-fc2f-44fc-b7e3-edb54d74160e.png)
 
 ## 8. 웹 화면
 
