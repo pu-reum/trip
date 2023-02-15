@@ -22,6 +22,8 @@
 
 ## 4. DB 설계
 
+![erd](https://user-images.githubusercontent.com/117332854/218951391-63c2dfa1-11ef-4b54-90aa-5736d680e81a.png)
+
 ## 5. 화면 설계
 
 ## 6. 프로젝트 구성원 및 역할
