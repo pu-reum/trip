@@ -55,12 +55,12 @@ button{
 					</tr>
 					<tr>
 						<th scope="row">내용</th>
-						<td colspan="5" id="notice" th:text="${notice.notice}"></td>
+						<td colspan="5" id="notice" th:utext="${notice.notice}"></td>
 					</tr>
 					<tr th:if="${notice.file != null}">
 						<th scope="row">첨부파일</th>
 						<td colspan="5"><img id="upimg"
-							th:src="@{/img/upload/}+${inquiry.file}"/></td>
+							th:src="@{/img/upload/}+${notice.file}"/></td>
 					</tr>
 				</tbody>
 			</table>
