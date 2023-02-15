@@ -43,7 +43,7 @@ th, td {
 }
 
 #place_desc {
-	float: right;
+	float: left;
 }
 
 #imgbtn {
@@ -53,7 +53,7 @@ th, td {
 </style>
 <script>
 	var map;
-	
+
 	//지도 생성
 	function center(lat, lng) {
 		var lat = $('#lat').val();
@@ -98,11 +98,11 @@ th, td {
 		$("#imgbtn").prop("src","/img/love.png");
 		$(".btn").prop('name',heartVal)
 	}
-} */
+	} */
 
-	function toggleImg(){
-		$('.btn').click(function(){
-			$('#imgbtn').attr('src','/img/heart.png');
+	function toggleImg() {
+		$('.btn').click(function() {
+			$('#imgbtn').attr('src', '/img/heart.png');
 		});
 	}
 
@@ -148,7 +148,7 @@ th, td {
 
 		/* $(".btn").click(function(){
 		var that=$(".btn");
-	$.ajax({
+		$.ajax({
 		url:'/trip/placedetail/heart',
 		type:'POST',
 		data:{'pdid':'${place.pdid}', 'custid':'${sessionScope.logincust}'},
@@ -161,12 +161,10 @@ th, td {
 				$('#imgbtn').prop("src","/img/love.png");
 			}
 		}
-	});
-	}); */
+		});
+		}); */
 
 	});
-
-
 </script>
 <body>
 	<div class="container">
@@ -192,12 +190,15 @@ th, td {
 							</button>
 						</td>
 					</tr>
+					<tr>
+						<td th:text="${place.pdaddr}"></td>
+					</tr>
 
 					<tr id="place_desc">
-						<th scope="col"></th>
+
+						<td><img id="img" th:src="${place.imgname1}"></td>
+
 						<td th:text="${place.pddesc}"></td>
-						<th scope="col"></th>
-						<td th:text="${place.pdaddr}"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -205,39 +206,45 @@ th, td {
 			<input type="hidden" id="pdname" name="pdname"
 				th:value="${place.pdname}">
 		</form>
-		<br> <img id="img" th:src="${place.imgname1}"> <br>
 
+<br>
 		<div id="map">
 			<input type="hidden" id="lat" name="lat" th:value="${place.lat}">
 			<input type="hidden" id="lng" name="lng" th:value="${place.lng}">
 		</div>
 
 
-	<!-- 리뷰 -->
-	<br>
-	<tbody id="relist">
-		<tr th:each="review:${review}">
-			<td th:text="${review.custid}"></td>
-			<td th:text="${review.rcontent}"></td>
-			<td th:text="${review.rdate}"></td>
-			<td><button id="delComment"><a th:href="@{/tirp/placedetail/commentDelete(rid=${review.rid})}">삭제하기</a></button></td><br>
-		</tr>
-	
-	
-	<div class="card my-4">
-		<h5 class="card-header">리뷰를 남겨보세요</h5>
-		<div class="card-body">
-			<form name="comment-form" th:action="@{/trip/placedetail/commentWrite}" method="post" autocomplete="off">
-				<div class="form-group">
-					<input type="hidden" name="pdid" th:value="${place.pdid}">
-					<textarea name="rcontent" id="rcontent" class="form-control" rows="3"></textarea>
+		<!-- 리뷰 -->
+		<br>
+		<tbody id="relist">
+			<tr th:each="review:${review}">
+				<td th:text="${review.custid}"></td>
+				<td th:text="${review.rcontent}"></td>
+				<td th:text="${review.rdate}"></td>
+				<td><button id="delComment">
+						<a th:href="@{/trip/placedetail/commentDelete(rid=${review.rid})}">삭제하기</a>
+					</button></td>
+				<br>
+			</tr>
+
+
+			<div class="card my-4">
+				<h5 class="card-header">리뷰를 남겨보세요</h5>
+				<div class="card-body">
+					<form name="comment-form"
+						th:action="@{/trip/placedetail/commentWrite}" method="post"
+						autocomplete="off">
+						<div class="form-group">
+							<input type="hidden" name="pdid" th:value="${place.pdid}">
+							<textarea name="rcontent" id="rcontent" class="form-control"
+								rows="3"></textarea>
+						</div>
+						<button type="submit" class="rv-btn">리뷰 등록</button>
+					</form>
 				</div>
-				<button type="submit" class="rv-btn">리뷰 등록</button>
-			</form>
-		</div>
-		
-	</div>
-	</tbody>
+
+			</div>
+		</tbody>
 	</div>
 </body>
 </html>

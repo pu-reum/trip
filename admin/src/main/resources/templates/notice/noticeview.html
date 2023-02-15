@@ -4,42 +4,39 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.container {
-	margin-top: 50px;
+.container{
+	margin-top:50px;
 	max-width: 700px;
 }
-
-.notice_view {
-	margin-top: 20px;
-	border: 1px solid;
+.notice_view{
+margin-top:20px;
+	border:1px solid;
 }
-
-td, th {
-	border-bottom: 1px solid;
-	border-right: 1px solid;
+td, th{
+	border-bottom:1px solid;
+	border-right:1px solid;
 	text-align: center;
 	padding: 5px;
 }
-
-button {
-	margin-top: 20px;
-	border: 0;
+button{
+	margin-top:20px;
+	border:0;
 }
 </style>
 </head>
 <body>
-	<div class="container">
-		<h2>상세 화면</h2>
+<div class="container">
+<h2>상세 화면</h2>
 		<form id="form" method="post">
-
-			<table class="notice_view">
+		
+	    	<table class="notice_view">
 				<colgroup>
-					<col width="15%" />
-					<col width="35%" />
-					<col width="15%" />
-					<col width="35%" />
+					<col width="15%"/>
+					<col width="35%"/>
+					<col width="15%"/>
+					<col width="35%"/>
 				</colgroup>
-
+				
 				<tbody>
 					<tr>
 						<th scope="row">글 번호</th>
@@ -53,25 +50,27 @@ button {
 					</tr>
 					<tr>
 						<th scope="row">제목</th>
-						<td colspan="3" id="nottitle" class="nottitle"
-							th:text="${notice.nottitle}"></td>
-					</tr>
-					 <tr th:if="${notice.file != null">
-						<th scope="row">첨부이미지</th>
-						<td colspan="5" id="notice" th:text="${notice.file}"></td>
+						<td colspan="3" id="nottitle" class="nottitle" th:text="${notice.nottitle}">
+						</td>
 					</tr>
 					<tr>
 						<th scope="row">내용</th>
-						<td colspan="5" id="notice" th:text="${notice.notice}"></td>
+						<td colspan="5" id="notice" th:utext="${notice.notice}"></td>
+					</tr>
+					<tr th:if="${notice.file != null}">
+						<th scope="row">첨부파일</th>
+						<td colspan="5"><img id="upimg"
+							th:src="@{/img/upload/}+${notice.file}"/></td>
 					</tr>
 				</tbody>
 			</table>
-			<input type="hidden" name="noid" th:value="${notice.noid}"> <span
-				class="send_btn">
-				<button id="back">
-					<a th:href="@{/notice}">목록</a>
-				</button>
-			</span> <span class="send_btn">
+			 <input type="hidden" name="noid" th:value="${notice.noid}">
+		</form>
+		
+		<span class="send_btn">
+			<button id="back"><a th:href="@{/notice}">목록</a></button>
+		</span>
+		<span class="send_btn">
 				<button id="edit">
 					<a th:href="@{/notice/noticeedit(noid=${notice.noid})}">수정</a>
 				</button>
@@ -80,9 +79,6 @@ button {
 					<a th:href="@{/notice/noticedelete(noid=${notice.noid})}">삭제</a>
 				</button>
 			</span>
-		</form>
-
-
 	</div>
 </body>
 </html>
