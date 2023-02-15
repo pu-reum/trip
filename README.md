@@ -37,3 +37,7 @@
 ## 8. 웹 화면
 
 ## 9. 트러블 슈팅
+
+![trouble](https://user-images.githubusercontent.com/117332854/218983913-d3ba91f1-bfa9-41bc-b064-ebee51514396.png)
+
+
