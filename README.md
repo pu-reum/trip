@@ -26,6 +26,8 @@
 
 ## 5. 화면 설계
 
+![image](https://user-images.githubusercontent.com/117332854/218951877-dc0a07cf-675c-4a54-9d01-2296603ee9f9.png)
+
 ## 6. 프로젝트 구성원 및 역할
 
 ## 7. 프로젝트 수행 기간
