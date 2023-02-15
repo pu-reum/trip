@@ -2,6 +2,8 @@ package com.trip.dto;
 
 import java.time.LocalDate;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,4 +23,6 @@ public class Notice {
 	private String file;
 	private int hit;
 	private LocalDate rdate;
+	
+	private MultipartFile img;
 }

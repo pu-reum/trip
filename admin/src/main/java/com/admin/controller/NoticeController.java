@@ -40,8 +40,8 @@ public class NoticeController {
 	@Value("${admindir}")
 	String admindir;
 	
-//	@Value("${custdir}")
-//	String custdir;
+	@Value("${custdir}")
+	String custdir;
 
 	// 공지 글 리스트
 	@RequestMapping("")
@@ -91,7 +91,7 @@ public class NoticeController {
 			try {
 				notice.setAdid(admin.getAdid());
 				notice.setFile(file);
-				ImgUtil.saveFile(notice.getImg(), admindir);
+				ImgUtil.saveFile2(notice.getImg(), admindir, custdir);
 				ns.insertNotice(notice);
 				model.addAttribute("result", notice);
 			}catch(Exception e) {

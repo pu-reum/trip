@@ -57,6 +57,11 @@ button{
 						<th scope="row">내용</th>
 						<td colspan="5" id="notice" th:text="${notice.notice}"></td>
 					</tr>
+					<tr th:if="${notice.file != null}">
+						<th scope="row">첨부파일</th>
+						<td colspan="5"><img id="upimg"
+							th:src="@{/img/upload/}+${inquiry.file}"/></td>
+					</tr>
 				</tbody>
 			</table>
 			 <input type="hidden" name="noid" th:value="${notice.noid}">

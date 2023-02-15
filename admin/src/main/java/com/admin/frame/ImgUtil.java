@@ -23,7 +23,24 @@ public class ImgUtil {
 		}
 		
 	}
-	
+	public static void saveFile2(MultipartFile mf, String admindir, String custdir) throws Exception{
+		byte [] data;
+		String file = mf.getOriginalFilename();
+		try {
+			data = mf.getBytes();
+			FileOutputStream fo = 
+					new FileOutputStream(custdir+file);
+			fo.write(data);
+			fo.close();
+			FileOutputStream fo2 = 
+					new FileOutputStream(admindir+file);
+			fo2.write(data);
+			fo2.close();
+		}catch(Exception e) {
+			throw e;
+		}
+		
+	}
 }
 
 
