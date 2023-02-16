@@ -106,17 +106,36 @@
 
 
 ✨ ** 관리자 **
+
 + Dashboard
+
+![대시보드](https://user-images.githubusercontent.com/117332854/219251600-847facc0-6a2c-4099-bf4e-0a36a7b23691.gif)
+
+    회원수, 운영진현황, 인기게시물, 인기여행정보, 통계등을 보여준다.
 
 + 추천코스관리 페이지
 
+![추천코스관리](https://user-images.githubusercontent.com/117332854/219251602-46e0c7fd-af3d-4b28-822e-0b64a1deabf5.gif)
+
+    관리자가 추천코스를 만들어 사용자페이지로 보낼수 있다.
+
 + 관리자정보관리 페이지
+
+![관리자정보관리](https://user-images.githubusercontent.com/117332854/219251598-b986509d-e95a-40df-bc92-f2293f51724a.gif)
+
+    관리자레벨에따라 접근권한이 달라진다.
 
 + 회원정보관리 페이지
 
+![회원정보관리](https://user-images.githubusercontent.com/117332854/219251604-3c0886f7-012c-4b70-8de1-faf4952a5f41.gif)
+
 + 게시판관리 페이지
 
+![관리자게시판관리](https://user-images.githubusercontent.com/117332854/219251593-cc2ebc3e-3c0c-43af-a688-1b1add5d8b49.gif)
+
 + 1:1문의관리 페이지
+
+![1대1문의관리](https://user-images.githubusercontent.com/117332854/219251606-d69589bb-026a-4988-a037-2959e06a1166.gif)
 
 ## 9. 트러블 슈팅
 
