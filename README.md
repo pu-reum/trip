@@ -43,7 +43,7 @@
 + 메인 페이지
 
 + 회워가입 페이지
-
+![회원가입페이지](https://user-images.githubusercontent.com/117332854/219245151-a14e3f57-c37c-4aab-83d4-d6f42bb37806.gif)
 + 로그인 페이지
 
 + 회워정보수정 페이지
