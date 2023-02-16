@@ -37,7 +37,7 @@
 
 ## 6. 프로젝트 구성원 및 역할
 
-  ![역할](https://user-images.githubusercontent.com/117332854/218985220-4842a6cf-fc2f-44fc-b7e3-edb54d74160e.png)
+  ![역할](https://user-images.githubusercontent.com/117332854/219272021-d5fc7d6b-da9c-46be-b660-6536a72ec200.png)
 
 ## 8. 웹 화면
 ✨ ** 사용자 **
