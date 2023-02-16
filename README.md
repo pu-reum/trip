@@ -84,9 +84,11 @@
 
 + 1:1문의 페이지
 
-
+![1대1문의페이지](https://user-images.githubusercontent.com/117332854/219247420-920ff295-fd7f-4fee-9b0b-3bc895aa648f.gif)
 
 + 챗봇
+
+![챗봇](https://user-images.githubusercontent.com/117332854/219247425-9a22477c-3a44-4312-bba0-439ee9b21f4e.gif)
 
 
 
