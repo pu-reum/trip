@@ -43,23 +43,25 @@
 + 메인 페이지
 
 ![메인페이지](https://user-images.githubusercontent.com/117332854/219245458-782c79c1-c84c-4e27-8c2d-44c61cbdf8c4.gif)
-
-+ 회워가입 페이지
+  이달의여행지슬라이드와 추천코스를 보여준다.
++ 회원가입 페이지
 
 ![회원가입페이지](https://user-images.githubusercontent.com/117332854/219245151-a14e3f57-c37c-4aab-83d4-d6f42bb37806.gif)
-
+  유효성검사와 이메일인증 기능을 추가하여 회원가입을 진행하였다.
+  
 + 로그인 페이지
 
 ![로그인페이지](https://user-images.githubusercontent.com/117332854/219245631-ca00c208-951e-4291-a9b1-e2f088f9e0b8.gif)
 
-+ 회워정보수정 페이지
++ 회정보수정 페이지
 
 ![회원정보수정페이지](https://user-images.githubusercontent.com/117332854/219245531-d242e9d5-8fc3-4c76-b02d-d8c331c589e2.gif)
 
 + 추천 코스 페이지
-
+  
 ![추천코스페이지](https://user-images.githubusercontent.com/117332854/219245666-6c1d75fb-d537-4b6c-8f00-48364d2d7d3e.gif)
-
+  관리자의 추천코스정보를 보여준다.
+  
 + 공지사항 페이지
 
 ![공지사항페이지](https://user-images.githubusercontent.com/117332854/219245673-f390e239-6f81-4a79-b831-dbc37dab1cf4.gif)
@@ -69,6 +71,7 @@
 ![여행소개페이지](https://user-images.githubusercontent.com/117332854/219245653-453c3a89-fd79-4ba5-b3b8-a68247698826.gif)
 
 ![여행소개상세페이지](https://user-images.githubusercontent.com/117332854/219245649-42080e15-f3d0-4222-a831-65f3d3735368.gif)
+  카카오맵api를 활용하여 여행지를 마킹하여 보여주고 좋아요기능과 찜기능을 추가하여 원하는 여행지를 위시리스트로 보낼수 있다.
 
 + 일정 페이지
 
@@ -81,15 +84,15 @@
 + 게시판 페이지
 
 ![게시판페이지](https://user-images.githubusercontent.com/117332854/219245669-9aee86e0-bd8a-45dd-8355-f3927ab54485.gif)
-
+  사용자들간의 여행정보를 교환할수있는 커뮤니티
 + 1:1문의 페이지
 
 ![1대1문의페이지](https://user-images.githubusercontent.com/117332854/219247420-920ff295-fd7f-4fee-9b0b-3bc895aa648f.gif)
-
+  1대1문의의 답변은 관리자페이지에서 확인하여 이메일로 답변을 보낸준다.
 + 챗봇
 
 ![챗봇](https://user-images.githubusercontent.com/117332854/219247425-9a22477c-3a44-4312-bba0-439ee9b21f4e.gif)
-
+  사용자의 간단한 문의를 처리할수있다.
 
 
 ✨ ** 관리자 **
